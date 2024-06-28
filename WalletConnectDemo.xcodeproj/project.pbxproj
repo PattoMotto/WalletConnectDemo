@@ -41,6 +41,7 @@
 		ADA9F40D2C2E6ADF00C6845F /* WalletConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA9F40C2C2E6ADF00C6845F /* WalletConnectService.swift */; };
 		ADA9F4102C2E6F8000C6845F /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA9F40F2C2E6F8000C6845F /* AppViewModel.swift */; };
 		ADA9F4132C2E75D100C6845F /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA9F4122C2E75D100C6845F /* SplashView.swift */; };
+		ADA9F4162C2F141900C6845F /* Configuration.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = ADA9F4152C2F141300C6845F /* Configuration.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		ADA9F40C2C2E6ADF00C6845F /* WalletConnectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectService.swift; sourceTree = "<group>"; };
 		ADA9F40F2C2E6F8000C6845F /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		ADA9F4122C2E75D100C6845F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		ADA9F4152C2F141300C6845F /* Configuration.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Configuration.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 				ADA9F40B2C2E6AD000C6845F /* Services */,
 				ADA9F3D02C2DEA3900C6845F /* Screens */,
 				AD873A732C2DE83300FC94A9 /* Preview Content */,
+				ADA9F4152C2F141300C6845F /* Configuration.xcconfig */,
 			);
 			path = WalletConnectDemo;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 			files = (
 				AD873A752C2DE83300FC94A9 /* Preview Assets.xcassets in Resources */,
 				AD873A722C2DE83300FC94A9 /* Assets.xcassets in Resources */,
+				ADA9F4162C2F141900C6845F /* Configuration.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +461,7 @@
 /* Begin XCBuildConfiguration section */
 		AD873A8C2C2DE83300FC94A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ADA9F4152C2F141300C6845F /* Configuration.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -520,6 +525,7 @@
 		};
 		AD873A8D2C2DE83300FC94A9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ADA9F4152C2F141300C6845F /* Configuration.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -576,6 +582,7 @@
 		};
 		AD873A8F2C2DE83300FC94A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ADA9F4152C2F141300C6845F /* Configuration.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -606,6 +613,7 @@
 		};
 		AD873A902C2DE83300FC94A9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ADA9F4152C2F141300C6845F /* Configuration.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

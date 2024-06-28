@@ -10,6 +10,7 @@ protocol WalletConnectService {
     func connect()
 }
 
+// TODO: Clean up the mock data
 class WalletConnectServiceImpl: WalletConnectService {
     private let metadata = AppMetadata(
         name: "Swift Dapp",
