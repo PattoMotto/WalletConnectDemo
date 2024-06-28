@@ -62,6 +62,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AD741BFC2C2F2E4C00823E36 /* WalletConnectDemoDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WalletConnectDemoDebug.entitlements; sourceTree = "<group>"; };
+		AD741BFD2C2F2EE400823E36 /* WalletConnectDemoRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WalletConnectDemoRelease.entitlements; sourceTree = "<group>"; };
 		AD873A6A2C2DE83200FC94A9 /* WalletConnectDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletConnectDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectDemoApp.swift; sourceTree = "<group>"; };
 		AD873A6F2C2DE83200FC94A9 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,8 @@
 		AD873A6C2C2DE83200FC94A9 /* WalletConnectDemo */ = {
 			isa = PBXGroup;
 			children = (
+				AD741BFD2C2F2EE400823E36 /* WalletConnectDemoRelease.entitlements */,
+				AD741BFC2C2F2E4C00823E36 /* WalletConnectDemoDebug.entitlements */,
 				ADA9F4142C2F118900C6845F /* NavigationLayer */,
 				ADA9F4002C2DFF4200C6845F /* Info.plist */,
 				AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */,
@@ -364,6 +368,7 @@
 				ADA9F3FA2C2DFB4800C6845F /* XCRemoteSwiftPackageReference "Starscream" */,
 				ADA9F4052C2E02F500C6845F /* XCRemoteSwiftPackageReference "Web3" */,
 				ADA9F4082C2E032A00C6845F /* XCRemoteSwiftPackageReference "HDWallet" */,
+				ADA9F4172C2F1D3D00C6845F /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
 			productRefGroup = AD873A6B2C2DE83200FC94A9 /* Products */;
 			projectDirPath = "";
@@ -586,12 +591,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WalletConnectDemo/WalletConnectDemoDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WalletConnectDemo/Preview Content\"";
+				DEVELOPMENT_TEAM = 8V35PKNB65;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalletConnectDemo/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -617,12 +625,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WalletConnectDemo/WalletConnectDemoRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WalletConnectDemo/Preview Content\"";
+				DEVELOPMENT_TEAM = 8V35PKNB65;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalletConnectDemo/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -786,6 +797,14 @@
 			requirement = {
 				branch = develop;
 				kind = branch;
+			};
+		};
+		ADA9F4172C2F1D3D00C6845F /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = exactVersion;
+				version = 0.54.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

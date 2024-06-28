@@ -6,7 +6,7 @@ import WalletConnectNetworking
 import WalletConnectSign
 
 enum Constants {
-    static let groupIdentifier = "group.com.walletconnect.dapp"
+    static let groupIdentifier = "group.com.pattomotto.wcdemo"
 }
 
 class ConnectViewModel: ObservableObject {
