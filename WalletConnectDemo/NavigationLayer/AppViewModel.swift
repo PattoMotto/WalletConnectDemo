@@ -9,21 +9,30 @@ class AppViewModel: ObservableObject {
         screen: Screen = .splash,
         walletConnectService: WalletConnectService = WalletConnectServiceImpl()
     ) {
+        defer { setup() }
+
         self.screen = screen
         self.walletConnectService = walletConnectService
     }
-    
+
+    private func setup() {
+        walletConnectService.setup()
+        observeAccountDetails()
+    }
+
     func didAppear() {
-        if restoreSession() {
+        if walletConnectService.isConnected {
             screen = .wallet(WalletViewModel())
         } else {
-            walletConnectService.bootstrap()
             screen = .connect(ConnectViewModel(serivce: walletConnectService))
         }
     }
 
-    private func restoreSession() -> Bool {
+    func handleDeeplink(_ url: URL) {
+        walletConnectService.handle(deeplink: url.absoluteString)
+    }
+
+    private func observeAccountDetails() {
         // TODO: Implement this!
-        false
     }
 }

@@ -6,6 +6,9 @@ struct WalletConnectDemoApp: App {
     var body: some Scene {
         WindowGroup {
             appRouter.view()
+                .onOpenURL { url in
+                    appRouter.handleDeeplink(url)
+                }
         }
     }
 }

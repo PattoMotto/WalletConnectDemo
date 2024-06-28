@@ -9,7 +9,7 @@ class AppRouter {
         AppView(viewModel: viewModel)
     }
     
-    func handleDeeplink() {
-        
+    func handleDeeplink(_ url: URL) {
+        viewModel.handleDeeplink(url)
     }
 }

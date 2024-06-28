@@ -1,5 +1,5 @@
 {
-  "originHash" : "51ca21c21a151b07045846f2918f57d081ca5ba2b9344f7aafe6b0bdd10a9b12",
+  "originHash" : "4c1e03b6801696a8a7d9cc0213ebf76b51c08baa9aeaf90e849e5721deb6964c",
   "pins" : [
     {
       "identity" : "bigint",
@@ -83,12 +83,12 @@
       }
     },
     {
-      "identity" : "swiftlintplugins",
+      "identity" : "wallet-mobile-sdk",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SimplyDanny/SwiftLintPlugins",
+      "location" : "https://github.com/WalletConnect/wallet-mobile-sdk",
       "state" : {
-        "revision" : "b8431a26655378581890d56b95a0b59aba9f62da",
-        "version" : "0.55.1"
+        "revision" : "b6dfb7d6b8447c7c5b238a10443a1ac28223f38f",
+        "version" : "1.0.0"
       }
     },
     {
@@ -107,6 +107,15 @@
       "state" : {
         "revision" : "569255adcfff0b37e4cb8004aea29d0e2d6266df",
         "version" : "1.0.2"
+      }
+    },
+    {
+      "identity" : "web3modal-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:WalletConnect/web3modal-swift.git",
+      "state" : {
+        "revision" : "5d148bfceb9f6ec1b4d39dba63b9b8129b041ef0",
+        "version" : "1.5.0"
       }
     }
   ],
