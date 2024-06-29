@@ -18,6 +18,8 @@
 		AD741C142C2F45F000823E36 /* WalletConnectNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = AD741C132C2F45F000823E36 /* WalletConnectNetworking */; };
 		AD741C172C2F532400823E36 /* SignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C162C2F532400823E36 /* SignView.swift */; };
 		AD741C192C2F532C00823E36 /* SignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C182C2F532C00823E36 /* SignViewModel.swift */; };
+		AD741C1B2C30386A00823E36 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C1A2C30386A00823E36 /* QRCodeGenerator.swift */; };
+		AD741C1D2C303C0800823E36 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C1C2C303C0800823E36 /* Constants.swift */; };
 		AD873A6E2C2DE83200FC94A9 /* WalletConnectDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */; };
 		AD873A702C2DE83200FC94A9 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD873A6F2C2DE83200FC94A9 /* AppView.swift */; };
 		AD873A722C2DE83300FC94A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD873A712C2DE83300FC94A9 /* Assets.xcassets */; };
@@ -33,7 +35,7 @@
 		ADA9F3DE2C2DED3900C6845F /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA9F3DD2C2DED3900C6845F /* Screen.swift */; };
 		ADA9F3F92C2DFA6800C6845F /* DefaultSocketFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA9F3F82C2DFA6800C6845F /* DefaultSocketFactory.swift */; };
 		ADA9F3FC2C2DFB4800C6845F /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = ADA9F3FB2C2DFB4800C6845F /* Starscream */; };
-		ADA9F3FF2C2DFCAC00C6845F /* InputConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA9F3FE2C2DFCAC00C6845F /* InputConfig.swift */; };
+		ADA9F3FF2C2DFCAC00C6845F /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA9F3FE2C2DFCAC00C6845F /* Configuration.swift */; };
 		ADA9F4022C2E00A900C6845F /* Proposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA9F4012C2E00A900C6845F /* Proposal.swift */; };
 		ADA9F4042C2E026200C6845F /* DefaultCryptoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA9F4032C2E026200C6845F /* DefaultCryptoProvider.swift */; };
 		ADA9F4072C2E02F500C6845F /* Web3 in Frameworks */ = {isa = PBXBuildFile; productRef = ADA9F4062C2E02F500C6845F /* Web3 */; };
@@ -68,6 +70,8 @@
 		AD741C082C2F441900823E36 /* FakeWalletConnectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeWalletConnectService.swift; sourceTree = "<group>"; };
 		AD741C162C2F532400823E36 /* SignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignView.swift; sourceTree = "<group>"; };
 		AD741C182C2F532C00823E36 /* SignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignViewModel.swift; sourceTree = "<group>"; };
+		AD741C1A2C30386A00823E36 /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+		AD741C1C2C303C0800823E36 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AD873A6A2C2DE83200FC94A9 /* WalletConnectDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletConnectDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectDemoApp.swift; sourceTree = "<group>"; };
 		AD873A6F2C2DE83200FC94A9 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
@@ -85,7 +89,7 @@
 		ADA9F3DB2C2DEC9D00C6845F /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		ADA9F3DD2C2DED3900C6845F /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		ADA9F3F82C2DFA6800C6845F /* DefaultSocketFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSocketFactory.swift; sourceTree = "<group>"; };
-		ADA9F3FE2C2DFCAC00C6845F /* InputConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputConfig.swift; sourceTree = "<group>"; };
+		ADA9F3FE2C2DFCAC00C6845F /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		ADA9F4002C2DFF4200C6845F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ADA9F4012C2E00A900C6845F /* Proposal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Proposal.swift; sourceTree = "<group>"; };
 		ADA9F4032C2E026200C6845F /* DefaultCryptoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCryptoProvider.swift; sourceTree = "<group>"; };
@@ -253,10 +257,12 @@
 			isa = PBXGroup;
 			children = (
 				ADA9F3F82C2DFA6800C6845F /* DefaultSocketFactory.swift */,
-				ADA9F3FE2C2DFCAC00C6845F /* InputConfig.swift */,
+				ADA9F3FE2C2DFCAC00C6845F /* Configuration.swift */,
 				ADA9F4012C2E00A900C6845F /* Proposal.swift */,
 				ADA9F4032C2E026200C6845F /* DefaultCryptoProvider.swift */,
 				AD741C052C2F3F2000823E36 /* AuthRequestParams+stub.swift */,
+				AD741C1A2C30386A00823E36 /* QRCodeGenerator.swift */,
+				AD741C1C2C303C0800823E36 /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -430,15 +436,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD741C192C2F532C00823E36 /* SignViewModel.swift in Sources */,
-				ADA9F3FF2C2DFCAC00C6845F /* InputConfig.swift in Sources */,
+				ADA9F3FF2C2DFCAC00C6845F /* Configuration.swift in Sources */,
 				ADA9F4022C2E00A900C6845F /* Proposal.swift in Sources */,
 				ADA9F4132C2E75D100C6845F /* SplashView.swift in Sources */,
 				ADA9F4102C2E6F8000C6845F /* AppViewModel.swift in Sources */,
+				AD741C1B2C30386A00823E36 /* QRCodeGenerator.swift in Sources */,
 				ADA9F3D42C2DEACC00C6845F /* ConnectView.swift in Sources */,
 				ADA9F3DA2C2DEBBD00C6845F /* ConnectViewModel.swift in Sources */,
 				ADA9F3D62C2DEAD100C6845F /* WalletView.swift in Sources */,
 				ADA9F3D82C2DEB2400C6845F /* WalletViewModel.swift in Sources */,
 				ADA9F3DC2C2DEC9D00C6845F /* AppRouter.swift in Sources */,
+				AD741C1D2C303C0800823E36 /* Constants.swift in Sources */,
 				AD741C172C2F532400823E36 /* SignView.swift in Sources */,
 				ADA9F3DE2C2DED3900C6845F /* Screen.swift in Sources */,
 				ADA9F3F92C2DFA6800C6845F /* DefaultSocketFactory.swift in Sources */,

@@ -5,10 +5,6 @@ import WalletConnectNetworking
 import WalletConnectSign
 import Combine
 
-enum Constants {
-    static let groupIdentifier = "group.com.pattomotto.wcdemo"
-}
-
 class ConnectViewModel: ObservableObject {
     private let serivce: WalletConnectService
     private var cancellables = Set<AnyCancellable>()
@@ -17,6 +13,7 @@ class ConnectViewModel: ObservableObject {
     @Published var isPresentedSignView = false
     @Published var isLoading = false
     @Published var isConnected = false
+    @Published var sheetHeight: CGFloat = 0
 
     init(serivce: WalletConnectService) {
         self.serivce = serivce

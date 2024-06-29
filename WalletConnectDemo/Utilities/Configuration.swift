@@ -1,6 +1,6 @@
 import Foundation
 
-struct InputConfig {
+enum Configuration {
     static var projectId: String {
         guard let projectId = config(for: "PROJECT_ID"), !projectId.isEmpty else {
             fatalError("PROJECT_ID is either not defined or empty in Configuration.xcconfig")

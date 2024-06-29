@@ -51,17 +51,17 @@ class WalletConnectServiceImpl: WalletConnectService {
         Task {
             Networking.configure(
                 groupIdentifier: Constants.groupIdentifier,
-                projectId: InputConfig.projectId,
+                projectId: Configuration.projectId,
                 socketFactory: DefaultSocketFactory()
             )
 
             WalletConnectModal.configure(
-                projectId: InputConfig.projectId,
+                projectId: Configuration.projectId,
                 metadata: metadata
             )
 
             Web3Modal.configure(
-                projectId: InputConfig.projectId,
+                projectId: Configuration.projectId,
                 metadata: metadata,
                 crypto: DefaultCryptoProvider(),
                 authRequestParams: .stub(), customWallets: [
