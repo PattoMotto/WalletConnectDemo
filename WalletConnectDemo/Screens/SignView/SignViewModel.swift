@@ -4,6 +4,7 @@ import UIKit
 class SignViewModel: ObservableObject {
     let uri: Uri
     @Published var qrCodeImageData: Data?
+    @Published var copiedToPasteboardCounter = 0
 
     init(uri: Uri) {
         defer { generateQR() }
@@ -12,7 +13,8 @@ class SignViewModel: ObservableObject {
     }
 
     func copyToPasteboard() {
-        UIPasteboard.general.string = uri.absoluteString
+        Pasteboard.copy(text: uri.absoluteString)
+        copiedToPasteboardCounter += 1
     }
 }
 

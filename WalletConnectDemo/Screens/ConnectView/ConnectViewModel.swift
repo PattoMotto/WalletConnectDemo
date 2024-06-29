@@ -6,7 +6,7 @@ import WalletConnectSign
 import Combine
 
 class ConnectViewModel: ObservableObject {
-    private let serivce: WalletConnectService
+    private let service: WalletConnectService
     private var cancellables = Set<AnyCancellable>()
 
     @Published var signViewModel: SignViewModel?
@@ -14,37 +14,27 @@ class ConnectViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var isConnected = false
     @Published var sheetHeight: CGFloat = 0
+    @Published var connectCounter = 0
 
-    init(serivce: WalletConnectService) {
-        self.serivce = serivce
+    init(service: WalletConnectService) {
+        self.service = service
         observeSession()
     }
     
     func onTapConnect() {
-        serivce.connect()
-    }
-
-    func onTapDisconnect() {
-        Task {
-            let result = await serivce.disconnect()
-            switch result {
-            case .success:
-                print("Disconnected")
-            case .failure(let error):
-                print(error)
-            }
-        }
+        connectCounter += 1
+        service.connect()
     }
 
     func observeSession() {
-        serivce.accountsDetailsPublisher.receive(on: DispatchQueue.main)
+        service.accountsDetailsPublisher.receive(on: DispatchQueue.main)
             .sink { [weak self] value in
                 self?.isConnected = !value.isEmpty
                 if !value.isEmpty {
                     self?.isLoading = true
                     Task { [weak self] in
                         guard let self else { return }
-                        let result = await self.serivce.signInWithEtherium()
+                        let result = await self.service.signInWithEtherium()
                         Task { @MainActor in
                             self.isLoading = false
                             switch result {

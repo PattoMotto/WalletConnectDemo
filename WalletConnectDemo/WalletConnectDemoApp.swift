@@ -2,12 +2,12 @@ import SwiftUI
 
 @main
 struct WalletConnectDemoApp: App {
-    private let appRouter = AppRouter()
+    private let appViewModel = AppViewModel()
     var body: some Scene {
         WindowGroup {
-            appRouter.view()
+            AppView(viewModel: appViewModel)
                 .onOpenURL { url in
-                    appRouter.handleDeeplink(url)
+                    appViewModel.handleDeeplink(url)
                 }
         }
     }

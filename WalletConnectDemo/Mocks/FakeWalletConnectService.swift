@@ -2,10 +2,13 @@ import Foundation
 
 #if DEBUG
 class FakeWalletConnectService: WalletConnectService {
-    
+    var isValidSessionPublisher: Published<Bool>.Publisher { $isValidSession }
+
+    @Published var isValidSession = false
+
     var accountsDetailsPublisher: Published<[AccountDetails]>.Publisher { $accountsDetails }
 
-    @Published private var accountsDetails = [AccountDetails]()
+    @Published var accountsDetails = [AccountDetails]()
 
     var isConnected = false
 

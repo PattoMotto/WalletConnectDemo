@@ -1,5 +1,5 @@
 {
-  "originHash" : "4c1e03b6801696a8a7d9cc0213ebf76b51c08baa9aeaf90e849e5721deb6964c",
+  "originHash" : "c4be70a0dfd21bfda3d861dd3cb4fe32348453b378697e2e820fa5c57eb6b8b1",
   "pins" : [
     {
       "identity" : "bigint",
@@ -83,15 +83,6 @@
       }
     },
     {
-      "identity" : "wallet-mobile-sdk",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/WalletConnect/wallet-mobile-sdk",
-      "state" : {
-        "revision" : "b6dfb7d6b8447c7c5b238a10443a1ac28223f38f",
-        "version" : "1.0.0"
-      }
-    },
-    {
       "identity" : "walletconnectswiftv2",
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:WalletConnect/WalletConnectSwiftV2.git",
@@ -107,15 +98,6 @@
       "state" : {
         "revision" : "569255adcfff0b37e4cb8004aea29d0e2d6266df",
         "version" : "1.0.2"
-      }
-    },
-    {
-      "identity" : "web3modal-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "git@github.com:WalletConnect/web3modal-swift.git",
-      "state" : {
-        "revision" : "5d148bfceb9f6ec1b4d39dba63b9b8129b041ef0",
-        "version" : "1.5.0"
       }
     }
   ],

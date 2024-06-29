@@ -4,13 +4,16 @@ import UIKit
 import WalletConnectModal
 import WalletConnectNetworking
 import WalletConnectSign
-import Web3Modal
 import Combine
 
 protocol WalletConnectService {
     var accountsDetailsPublisher: Published<[AccountDetails]>.Publisher { get }
-
+    var accountsDetails: [AccountDetails] { get }
+    
     var isConnected: Bool { get }
+
+    var isValidSessionPublisher: Published<Bool>.Publisher { get }
+    var isValidSession: Bool { get }
 
     func setup()
     func connect()
@@ -27,24 +30,24 @@ enum WalletConnectServiceError: Error {
 // TODO: Clean up the mock data
 class WalletConnectServiceImpl: WalletConnectService {
     var accountsDetailsPublisher: Published<[AccountDetails]>.Publisher { $accountsDetails }
-
+    var isValidSessionPublisher: Published<Bool>.Publisher { $isValidSession }
     var isConnected: Bool { session != nil && !accountsDetails.isEmpty }
 
-    private var session: Session?
+    @Published var isValidSession = false
     @Published var accountsDetails = [AccountDetails]()
     @Published var message: String?
-    private let chain = Chain(name: "Ethereum", id: "eip155:1")
-    private var walletConnectUri: WalletConnectURI?
 
-    private var cancellables = Set<AnyCancellable>()
-
+    private var session: Session?
+    private var walletConnectURI: WalletConnectURI?
     private let metadata = AppMetadata(
-        name: "Swift Dapp",
-        description: "WalletConnect DApp sample",
+        name: "WalletConnect Demo",
+        description: "WalletConnect sample",
         url: "https://lab.web3modal.com/dapp",
         icons: ["https://avatars.githubusercontent.com/u/37784886"],
         redirect: try! AppMetadata.Redirect(native: "wcdemo://", universal: nil)
     )
+
+    private var cancellables = Set<AnyCancellable>()
 
     func setup() {
         // TODO: Recheck the steps
@@ -60,34 +63,15 @@ class WalletConnectServiceImpl: WalletConnectService {
                 metadata: metadata
             )
 
-            Web3Modal.configure(
-                projectId: Configuration.projectId,
-                metadata: metadata,
-                crypto: DefaultCryptoProvider(),
-                authRequestParams: .stub(), customWallets: [
-                    .init(
-                        id: "swift-sample",
-                        name: "Swift Sample Wallet",
-                        homepage: "https://walletconnect.com/",
-                        imageUrl: "https://avatars.githubusercontent.com/u/37784886?s=200&v=4",
-                        order: 1,
-                        mobileLink: "wcdemo://",
-                        linkMode: "https://lab.web3modal.com/wallet"
-                    )
-                ]
-            )
-
             Sign.configure(crypto: DefaultCryptoProvider())
 
 #if DEBUG
             Sign.instance.logger.setLogging(level: .debug)
             Networking.instance.setLogging(level: .debug)
-            Web3Modal.instance.disableAnalytics()
 #endif
 
             getSession()
             observeToSignPublisher()
-            observeSIWEPublisher()
         }
     }
 
@@ -108,6 +92,7 @@ class WalletConnectServiceImpl: WalletConnectService {
                 do {
                     try await Sign.instance.disconnect(topic: session.topic)
                     accountsDetails.removeAll()
+                    isValidSession = false
                 } catch {
                     await actor.setError(error)
                 }
@@ -124,6 +109,7 @@ class WalletConnectServiceImpl: WalletConnectService {
             guard let uri else {
                 return .failure(.cannotGenerateSignUri)
             }
+            walletConnectURI = uri
             return .success(Uri(absoluteString: uri.absoluteString, deeplinkUri: uri.deeplinkUri))
         } catch {
             return .failure(.sdkError(error))
@@ -142,13 +128,16 @@ class WalletConnectServiceImpl: WalletConnectService {
 
 // MARK: - PRIVATE
 private extension WalletConnectServiceImpl {
+    func invalidateSession() {
+        accountsDetails.removeAll()
+        isValidSession = false
+    }
+
     func observeToSignPublisher() {
         Sign.instance.sessionDeletePublisher
             .receive(on: DispatchQueue.main)
             .sink { [unowned self] _ in
-                self.accountsDetails.removeAll()
-//                router.popToRoot()
-//                Task(priority: .high) { ActivityIndicatorManager.shared.stop() }
+                self.invalidateSession()
             }
             .store(in: &cancellables)
 
@@ -157,19 +146,18 @@ private extension WalletConnectServiceImpl {
             .sink { [unowned self] response in
                 switch response.result {
                 case .success(let (session, _)):
-                    print("PM: ", session)
-                    if session == nil {
-//                        AlertPresenter.present(message: "Wallet Succesfully Authenticated", type: .success)
-                    } else {
-//                        self.router.dismiss()
-                        self.getSession()
+                    if let session {
+                        print("PM: ", session)
+
+                        self.isValidSession = true
+
+                        // Reset, never use for now.
+                        self.walletConnectURI = nil
                     }
                     break
                 case .failure(let error):
                     print(error)
-//                    AlertPresenter.present(message: error.localizedDescription, type: .error)
                 }
-//                Task(priority: .high) { ActivityIndicatorManager.shared.stop() }
             }
             .store(in: &cancellables)
 
@@ -177,33 +165,13 @@ private extension WalletConnectServiceImpl {
             .receive(on: DispatchQueue.main)
             .sink { response in
                 print("PM: ", response)
-//                Task(priority: .high) { ActivityIndicatorManager.shared.stop() }
             }
             .store(in: &cancellables)
 
         Sign.instance.requestExpirationPublisher
             .receive(on: DispatchQueue.main)
             .sink { _ in
-//                Task(priority: .high) { ActivityIndicatorManager.shared.stop() }
-//                AlertPresenter.present(message: "Session Request has expired", type: .warning)
-            }
-            .store(in: &cancellables)
-    }
-
-    func observeSIWEPublisher() {
-        Web3Modal.instance.SIWEAuthenticationPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] result in
-                switch result {
-                case .success((let message, let signature)):
-                    print("PM: ", message, signature)
-//                    AlertPresenter.present(message: "Authenticated with SIWE", type: .success)
-//                    self.router.dismiss()
-                    self?.getSession()
-                case .failure(let error):
-                    print(error)
-//                    AlertPresenter.present(message: "\(error)", type: .warning)
-                }
+                print("request expired")
             }
             .store(in: &cancellables)
     }
@@ -224,23 +192,6 @@ private extension WalletConnectServiceImpl {
             }
         }
     }
-}
-
-// TODO: Move to new file
-struct Chain {
-    let name: String
-    let id: String
-}
-
-struct AccountDetails {
-    let chain: String
-    let methods: [String]
-    let account: String
-}
-
-struct Uri {
-    let absoluteString: String
-    let deeplinkUri: String
 }
 
 actor DisconnectActor {

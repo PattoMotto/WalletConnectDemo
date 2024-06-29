@@ -10,22 +10,18 @@ struct ConnectView: View {
             }
             .buttonStyle(BorderedButtonStyle())
             .disabled(viewModel.isLoading)
+            .sensoryFeedback(.success, trigger: viewModel.connectCounter)
+
+            
 
             if viewModel.isLoading {
                 VStack {
                     ProgressView("Loading")
                         .padding(.top, 24)
+
                     Spacer()
                 }
             }
-            VStack {
-                Spacer()
-                Button("Disconnect", role: .destructive) {
-                    viewModel.onTapDisconnect()
-                }
-                .buttonStyle(BorderedButtonStyle())
-            }
-
         }
         .sheet(isPresented: $viewModel.isPresentedSignView) {
             if let signViewModel = viewModel.signViewModel {
@@ -50,6 +46,6 @@ struct ConnectView: View {
 
 #if DEBUG
 #Preview {
-    ConnectView(viewModel: ConnectViewModel(serivce: FakeWalletConnectService()))
+    ConnectView(viewModel: ConnectViewModel(service: FakeWalletConnectService()))
 }
 #endif
