@@ -45,8 +45,7 @@ class SessionManagerServiceImpl: SessionManagerService {
             try keychainService.delete(key: Constants.sessionKey)
             session = nil
         } catch {
-            // TODO: Log this to server
-            print(error)
+            DevelopmentLog.error(error.localizedDescription)
         }
     }
 }
@@ -82,7 +81,7 @@ private extension SessionManagerServiceImpl {
                     try keychainService.create(key: key, value: session)
                 }
             } catch {
-                print(error)
+                DevelopmentLog.error(error.localizedDescription)
             }
         }
     }

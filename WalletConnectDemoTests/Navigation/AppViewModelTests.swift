@@ -42,13 +42,11 @@ final class AppViewModelTests: XCTestCase {
     func testDidAppearWithoutValidSession() {
         sut.didAppear()
 
-        let expectation = expectation(description: "wait for screen to be changed")
+        let expectationScreen = expectation(description: "wait for screen to be changed")
         sut.$screen
-            .receive(on: DispatchQueue.main)
-            .sink { screen in
-                if screen.name != "splash" {
-                    expectation.fulfill()
-                }
+            .filter { $0.name != "splash" }
+            .sink { _ in
+                expectationScreen.fulfill()
             }
             .store(in: &cancellables)
         waitForExpectations(timeout: 2)
@@ -58,13 +56,11 @@ final class AppViewModelTests: XCTestCase {
     func testDidAppearWithValidSession() {
         sut.didAppear()
 
-        let expectation = expectation(description: "wait for screen to be changed")
+        let expectationScreen = expectation(description: "wait for screen to be changed")
         sut.$screen
-            .receive(on: DispatchQueue.main)
-            .sink { screen in
-                if screen.name != "splash" {
-                    expectation.fulfill()
-                }
+            .filter { $0.name != "splash" }
+            .sink { _ in
+                expectationScreen.fulfill()
             }
             .store(in: &cancellables)
         sessionManagerService.isValidSession = true

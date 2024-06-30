@@ -10,13 +10,16 @@ class WalletViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let walletConnectService: WalletConnectService
     private let sessionManagerService: SessionManagerService
+    private let copyToPasteboardHandler: (String) -> Void
 
     init(
         walletConnectService: WalletConnectService,
-        sessionManagerService: SessionManagerService
+        sessionManagerService: SessionManagerService,
+        copyToPasteboardHandler: @escaping (String) -> Void = Pasteboard.copy(text:)
     ) {
         self.walletConnectService = walletConnectService
         self.sessionManagerService = sessionManagerService
+        self.copyToPasteboardHandler = copyToPasteboardHandler
 
         setup()
     }
@@ -35,12 +38,13 @@ class WalletViewModel: ObservableObject {
             case .failure(let error):
                 await handle(error: error)
             }
+            isDisconnecting = false
         }
     }
 
-    func copyAddressToPasteboard() {
+    func onTapCopyAddressToPasteboard() {
         if let addressId {
-            Pasteboard.copy(text: addressId)
+            copyToPasteboardHandler(addressId)
             copiedToPasteboardCounter += 1
         }
     }

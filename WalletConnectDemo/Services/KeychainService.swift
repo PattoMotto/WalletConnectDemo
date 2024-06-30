@@ -8,7 +8,6 @@ protocol KeychainService {
     func delete(key: String) throws
 }
 
-
 class KeychainServiceImpl: KeychainService {
 
     private let jsonDecoder = JSONDecoder()

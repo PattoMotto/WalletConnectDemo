@@ -1,6 +1,6 @@
 import Foundation
 
-struct AccountDetails {
+struct AccountDetails: Equatable {
     let chain: String
     let methods: [String]
     let account: String

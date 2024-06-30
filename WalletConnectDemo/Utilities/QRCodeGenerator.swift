@@ -2,8 +2,7 @@ import Foundation
 import UIKit
 import CoreImage.CIFilterBuiltins
 
-struct QRCodeGenerator {
-
+enum QRCodeGenerator {
     static func generateQRCode(from string: String) -> UIImage {
         let context = CIContext()
         let filter = CIFilter.qrCodeGenerator()

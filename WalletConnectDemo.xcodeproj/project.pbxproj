@@ -38,6 +38,12 @@
 		AD741C4B2C31A11B00823E36 /* SessionManagerServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C4A2C31A11B00823E36 /* SessionManagerServiceTests.swift */; };
 		AD741C4D2C31A41B00823E36 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C4C2C31A41B00823E36 /* Session.swift */; };
 		AD741C522C31A5B100823E36 /* WalletConnectSignSession+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C512C31A5B100823E36 /* WalletConnectSignSession+Ext.swift */; };
+		AD741C542C31B79C00823E36 /* ConnectViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C532C31B79C00823E36 /* ConnectViewModelTests.swift */; };
+		AD741C562C31C80E00823E36 /* SignViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C552C31C80D00823E36 /* SignViewModelTests.swift */; };
+		AD741C5A2C31C89900823E36 /* Uri.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C592C31C89900823E36 /* Uri.swift */; };
+		AD741C5C2C31CAA100823E36 /* WalletViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C5B2C31CAA100823E36 /* WalletViewModelTests.swift */; };
+		AD741C5E2C31CB5600823E36 /* AccountDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C5D2C31CB5600823E36 /* AccountDetails.swift */; };
+		AD741C602C31D25300823E36 /* DevelopmentLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C5F2C31D25300823E36 /* DevelopmentLog.swift */; };
 		AD873A6E2C2DE83200FC94A9 /* WalletConnectDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */; };
 		AD873A702C2DE83200FC94A9 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD873A6F2C2DE83200FC94A9 /* AppView.swift */; };
 		AD873A722C2DE83300FC94A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD873A712C2DE83300FC94A9 /* Assets.xcassets */; };
@@ -108,6 +114,12 @@
 		AD741C4A2C31A11B00823E36 /* SessionManagerServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManagerServiceTests.swift; sourceTree = "<group>"; };
 		AD741C4C2C31A41B00823E36 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		AD741C512C31A5B100823E36 /* WalletConnectSignSession+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletConnectSignSession+Ext.swift"; sourceTree = "<group>"; };
+		AD741C532C31B79C00823E36 /* ConnectViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewModelTests.swift; sourceTree = "<group>"; };
+		AD741C552C31C80D00823E36 /* SignViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignViewModelTests.swift; sourceTree = "<group>"; };
+		AD741C592C31C89900823E36 /* Uri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uri.swift; sourceTree = "<group>"; };
+		AD741C5B2C31CAA100823E36 /* WalletViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModelTests.swift; sourceTree = "<group>"; };
+		AD741C5D2C31CB5600823E36 /* AccountDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetails.swift; sourceTree = "<group>"; };
+		AD741C5F2C31D25300823E36 /* DevelopmentLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentLog.swift; sourceTree = "<group>"; };
 		AD873A6A2C2DE83200FC94A9 /* WalletConnectDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletConnectDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectDemoApp.swift; sourceTree = "<group>"; };
 		AD873A6F2C2DE83200FC94A9 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
@@ -235,6 +247,8 @@
 				AD741C412C318D2400823E36 /* MockWalletConnectService.swift */,
 				AD741C432C318D4700823E36 /* MockSessionManagerService.swift */,
 				AD741C452C319C0200823E36 /* Spy.swift */,
+				AD741C592C31C89900823E36 /* Uri.swift */,
+				AD741C5D2C31CB5600823E36 /* AccountDetails.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -250,6 +264,8 @@
 		AD741C482C31A0E500823E36 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				AD741C532C31B79C00823E36 /* ConnectViewModelTests.swift */,
+				AD741C5B2C31CAA100823E36 /* WalletViewModelTests.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -268,6 +284,22 @@
 				AD741C512C31A5B100823E36 /* WalletConnectSignSession+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AD741C572C31C81D00823E36 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AD741C152C2F530300823E36 /* SignView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AD741C582C31C83600823E36 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AD741C552C31C80D00823E36 /* SignViewModelTests.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		AD873A612C2DE83200FC94A9 = {
@@ -293,12 +325,12 @@
 		AD873A6C2C2DE83200FC94A9 /* WalletConnectDemo */ = {
 			isa = PBXGroup;
 			children = (
-				AD741C502C31A59800823E36 /* Extensions */,
 				AD873A712C2DE83300FC94A9 /* Assets.xcassets */,
 				AD741C2D2C313A5B00823E36 /* Components */,
 				ADA9F4152C2F141300C6845F /* Configuration.xcconfig */,
 				AD741C2A2C31208400823E36 /* Dependencies */,
 				AD741C302C31473000823E36 /* Errors */,
+				AD741C502C31A59800823E36 /* Extensions */,
 				ADA9F4002C2DFF4200C6845F /* Info.plist */,
 				AD741C072C2F43FB00823E36 /* Mocks */,
 				AD741C202C3076D600823E36 /* Models */,
@@ -308,6 +340,7 @@
 				ADA9F40B2C2E6AD000C6845F /* Services */,
 				ADA9F40E2C2E6B6000C6845F /* Utilities */,
 				AD741C332C3149F300823E36 /* ViewModifiers */,
+				AD741C572C31C81D00823E36 /* Views */,
 				AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */,
 				AD741BFC2C2F2E4C00823E36 /* WalletConnectDemoDebug.entitlements */,
 				AD741BFD2C2F2EE400823E36 /* WalletConnectDemoRelease.entitlements */,
@@ -326,10 +359,11 @@
 		AD873A7D2C2DE83300FC94A9 /* WalletConnectDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				AD741C492C31A10100823E36 /* Services */,
-				AD741C482C31A0E500823E36 /* Screens */,
-				AD741C472C31A0CF00823E36 /* Navigation */,
 				AD741C3E2C318B9C00823E36 /* Mocks */,
+				AD741C472C31A0CF00823E36 /* Navigation */,
+				AD741C482C31A0E500823E36 /* Screens */,
+				AD741C492C31A10100823E36 /* Services */,
+				AD741C582C31C83600823E36 /* Views */,
 			);
 			path = WalletConnectDemoTests;
 			sourceTree = "<group>";
@@ -346,7 +380,6 @@
 		ADA9F3D02C2DEA3900C6845F /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				AD741C152C2F530300823E36 /* SignView */,
 				ADA9F4112C2E75C400C6845F /* SplashView */,
 				ADA9F3D22C2DEA8800C6845F /* WalletView */,
 				ADA9F3D12C2DEA4200C6845F /* ConnectView */,
@@ -394,6 +427,7 @@
 				AD741C1A2C30386A00823E36 /* QRCodeGenerator.swift */,
 				AD741C1C2C303C0800823E36 /* AppConstants.swift */,
 				AD741C1E2C3048D200823E36 /* Pasteboard.swift */,
+				AD741C5F2C31D25300823E36 /* DevelopmentLog.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -584,6 +618,7 @@
 				ADA9F3DE2C2DED3900C6845F /* Screen.swift in Sources */,
 				AD741C3B2C3176D100823E36 /* AppError.swift in Sources */,
 				AD741C222C3076EB00823E36 /* Uri.swift in Sources */,
+				AD741C602C31D25300823E36 /* DevelopmentLog.swift in Sources */,
 				ADA9F3F92C2DFA6800C6845F /* DefaultSocketFactory.swift in Sources */,
 				ADA9F40D2C2E6ADF00C6845F /* WalletConnectService.swift in Sources */,
 				AD873A702C2DE83200FC94A9 /* AppView.swift in Sources */,
@@ -603,12 +638,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD741C542C31B79C00823E36 /* ConnectViewModelTests.swift in Sources */,
 				AD741C442C318D4700823E36 /* MockSessionManagerService.swift in Sources */,
 				AD741C3D2C3186FA00823E36 /* AppViewModelTests.swift in Sources */,
+				AD741C562C31C80E00823E36 /* SignViewModelTests.swift in Sources */,
+				AD741C5A2C31C89900823E36 /* Uri.swift in Sources */,
 				AD741C462C319C0200823E36 /* Spy.swift in Sources */,
+				AD741C5E2C31CB5600823E36 /* AccountDetails.swift in Sources */,
 				AD741C4B2C31A11B00823E36 /* SessionManagerServiceTests.swift in Sources */,
 				AD741C402C318BAF00823E36 /* MockKeychainService.swift in Sources */,
 				AD741C422C318D2400823E36 /* MockWalletConnectService.swift in Sources */,
+				AD741C5C2C31CAA100823E36 /* WalletViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

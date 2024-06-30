@@ -30,7 +30,7 @@ struct WalletView: View {
                         .font(.subheadline)
                     
                     Button("Copy address") {
-                        viewModel.copyAddressToPasteboard()
+                        viewModel.onTapCopyAddressToPasteboard()
                     }
                     .buttonStyle(BorderedButtonStyle())
                     .sensoryFeedback(.success, trigger: viewModel.copiedToPasteboardCounter)

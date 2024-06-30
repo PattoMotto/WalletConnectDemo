@@ -1,6 +1,6 @@
 import Foundation
 
-struct Session: Codable {
+struct Session: Codable, Equatable {
     let topic: String
     let pairingTopic: String
     let expiryDate: Date

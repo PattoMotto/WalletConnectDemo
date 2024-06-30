@@ -25,6 +25,13 @@ protocol WalletConnectService {
 class WalletConnectServiceImpl: WalletConnectService {
     private enum Constants {
         static let personalSignKey = "personal_sign"
+        static let metadata = AppMetadata(
+            name: "WalletConnect Demo",
+            description: "WalletConnect sample",
+            url: "https://pattomotto.com",
+            icons: ["https://avatars.githubusercontent.com/u/37784886"],
+            redirect: try! AppMetadata.Redirect(native: "wcdemo://", universal: nil)
+        )
     }
 
     var accountsDetailsPublisher: Published<[AccountDetails]>.Publisher { $accountsDetails }
@@ -49,14 +56,6 @@ class WalletConnectServiceImpl: WalletConnectService {
 
     private var session: Session?
     private var walletConnectURI: WalletConnectURI?
-    private let metadata = AppMetadata(
-        name: "WalletConnect Demo",
-        description: "WalletConnect sample",
-        url: "https://pattomotto.com",
-        icons: ["https://avatars.githubusercontent.com/u/37784886"],
-        redirect: try! AppMetadata.Redirect(native: "wcdemo://", universal: nil)
-    )
-
     private var cancellables = Set<AnyCancellable>()
 
     func setup() {
@@ -70,7 +69,7 @@ class WalletConnectServiceImpl: WalletConnectService {
 
             WalletConnectModal.configure(
                 projectId: Configuration.projectId,
-                metadata: metadata
+                metadata: Constants.metadata
             )
 
             Sign.configure(crypto: DefaultCryptoProvider())
@@ -130,7 +129,7 @@ class WalletConnectServiceImpl: WalletConnectService {
         do {
             try Sign.instance.dispatchEnvelope(deeplink)
         } catch {
-            print(error)
+            DevelopmentLog.error(error.localizedDescription)
         }
     }
 }
@@ -173,13 +172,6 @@ private extension WalletConnectServiceImpl {
                 case .failure(let error):
                     self.authResponse = .failure(.authError(error))
                 }
-            }
-            .store(in: &cancellables)
-
-        Sign.instance.sessionResponsePublisher
-            .receive(on: DispatchQueue.main)
-            .sink { response in
-                print("PM: sessionResponsePublisher", response)
             }
             .store(in: &cancellables)
 
@@ -227,18 +219,6 @@ private extension WalletConnectServiceImpl {
             .receive(on: DispatchQueue.main)
             .sink { [unowned self] proposal, reason in
                 self.error = .sessionRejection(reason.message)
-            }
-            .store(in: &cancellables)
-
-        WalletConnectModal.instance.sessionResponsePublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [unowned self] response in
-                switch response.result {
-                case .response(let response):
-                    print("PM: sessionResponsePublisher", response)
-                case .error(let error):
-                    self.error = .jsonRPCError(error)
-                }
             }
             .store(in: &cancellables)
     }

@@ -7,6 +7,10 @@ class Spy {
         XCTAssertTrue(invokedFunctionName.contains(functionName))
     }
 
+    func notInvoked(_ functionName: String) {
+        XCTAssertFalse(invokedFunctionName.contains(functionName))
+    }
+
     func record(_ functionName: String = #function) {
         invokedFunctionName.append(functionName)
     }

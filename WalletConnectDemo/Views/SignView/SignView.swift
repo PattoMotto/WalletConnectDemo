@@ -18,11 +18,14 @@ struct SignView: View {
             }
 
             Button("Copy link") {
-                viewModel.copyToPasteboard()
+                viewModel.onTapCopyToPasteboard()
             }
             .buttonStyle(BorderedButtonStyle())
             .sensoryFeedback(.success, trigger: viewModel.copiedToPasteboardCounter)
         }
         .padding(.all, AppConstants.Padding.default)
+        .onAppear {
+            viewModel.didAppear()
+        }
     }
 }

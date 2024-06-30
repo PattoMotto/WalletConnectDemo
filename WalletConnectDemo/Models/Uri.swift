@@ -1,6 +1,6 @@
 import Foundation
 
-struct Uri {
+struct Uri: Equatable {
     let absoluteString: String
     let deeplinkUri: String
 }

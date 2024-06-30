@@ -32,10 +32,8 @@ final class SessionManagerServiceTests: XCTestCase {
 
         let expectation = expectation(description: "wait for isValidSession to be changed")
         sut.isValidSessionPublisher
-            .receive(on: DispatchQueue.main)
-            .dropFirst()
-            .sink { isValidSession in
-                XCTAssertTrue(isValidSession)
+            .filter { $0 }
+            .sink { _ in
                 expectation.fulfill()
             }
             .store(in: &cancellables)
