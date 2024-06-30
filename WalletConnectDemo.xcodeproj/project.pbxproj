@@ -21,6 +21,9 @@
 		AD741C1F2C3048D200823E36 /* Pasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C1E2C3048D200823E36 /* Pasteboard.swift */; };
 		AD741C222C3076EB00823E36 /* Uri.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C212C3076EB00823E36 /* Uri.swift */; };
 		AD741C242C30770000823E36 /* AccountDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C232C30770000823E36 /* AccountDetails.swift */; };
+		AD741C272C3078DF00823E36 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C262C3078DF00823E36 /* KeychainService.swift */; };
+		AD741C292C307E9400823E36 /* SessionManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C282C307E9400823E36 /* SessionManagerService.swift */; };
+		AD741C2C2C3120A000823E36 /* DependenciesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C2B2C3120A000823E36 /* DependenciesManager.swift */; };
 		AD873A6E2C2DE83200FC94A9 /* WalletConnectDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */; };
 		AD873A702C2DE83200FC94A9 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD873A6F2C2DE83200FC94A9 /* AppView.swift */; };
 		AD873A722C2DE83300FC94A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD873A712C2DE83300FC94A9 /* Assets.xcassets */; };
@@ -75,6 +78,9 @@
 		AD741C1E2C3048D200823E36 /* Pasteboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pasteboard.swift; sourceTree = "<group>"; };
 		AD741C212C3076EB00823E36 /* Uri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uri.swift; sourceTree = "<group>"; };
 		AD741C232C30770000823E36 /* AccountDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetails.swift; sourceTree = "<group>"; };
+		AD741C262C3078DF00823E36 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		AD741C282C307E9400823E36 /* SessionManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManagerService.swift; sourceTree = "<group>"; };
+		AD741C2B2C3120A000823E36 /* DependenciesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependenciesManager.swift; sourceTree = "<group>"; };
 		AD873A6A2C2DE83200FC94A9 /* WalletConnectDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletConnectDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectDemoApp.swift; sourceTree = "<group>"; };
 		AD873A6F2C2DE83200FC94A9 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
@@ -160,6 +166,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		AD741C2A2C31208400823E36 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				AD741C2B2C3120A000823E36 /* DependenciesManager.swift */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
 		AD873A612C2DE83200FC94A9 = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +197,7 @@
 		AD873A6C2C2DE83200FC94A9 /* WalletConnectDemo */ = {
 			isa = PBXGroup;
 			children = (
+				AD741C2A2C31208400823E36 /* Dependencies */,
 				AD741BFD2C2F2EE400823E36 /* WalletConnectDemoRelease.entitlements */,
 				AD741BFC2C2F2E4C00823E36 /* WalletConnectDemoDebug.entitlements */,
 				ADA9F4142C2F118900C6845F /* NavigationLayer */,
@@ -258,7 +273,9 @@
 		ADA9F40B2C2E6AD000C6845F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				AD741C262C3078DF00823E36 /* KeychainService.swift */,
 				ADA9F40C2C2E6ADF00C6845F /* WalletConnectService.swift */,
+				AD741C282C307E9400823E36 /* SessionManagerService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -446,7 +463,9 @@
 				ADA9F3FF2C2DFCAC00C6845F /* Configuration.swift in Sources */,
 				ADA9F4022C2E00A900C6845F /* Proposal.swift in Sources */,
 				ADA9F4132C2E75D100C6845F /* SplashView.swift in Sources */,
+				AD741C292C307E9400823E36 /* SessionManagerService.swift in Sources */,
 				ADA9F4102C2E6F8000C6845F /* AppViewModel.swift in Sources */,
+				AD741C272C3078DF00823E36 /* KeychainService.swift in Sources */,
 				AD741C1B2C30386A00823E36 /* QRCodeGenerator.swift in Sources */,
 				ADA9F3D42C2DEACC00C6845F /* ConnectView.swift in Sources */,
 				ADA9F3DA2C2DEBBD00C6845F /* ConnectViewModel.swift in Sources */,
@@ -464,6 +483,7 @@
 				AD873A6E2C2DE83200FC94A9 /* WalletConnectDemoApp.swift in Sources */,
 				ADA9F4042C2E026200C6845F /* DefaultCryptoProvider.swift in Sources */,
 				AD741C092C2F441900823E36 /* FakeWalletConnectService.swift in Sources */,
+				AD741C2C2C3120A000823E36 /* DependenciesManager.swift in Sources */,
 				AD741C062C2F3F2000823E36 /* AuthRequestParams+stub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -640,8 +660,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -650,6 +670,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pattomotto.WalletConnectDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -674,8 +698,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -684,6 +708,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pattomotto.WalletConnectDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

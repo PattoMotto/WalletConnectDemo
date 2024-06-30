@@ -12,12 +12,10 @@ struct ConnectView: View {
             .disabled(viewModel.isLoading)
             .sensoryFeedback(.success, trigger: viewModel.connectCounter)
 
-            
-
             if viewModel.isLoading {
                 VStack {
                     ProgressView("Loading")
-                        .padding(.top, 24)
+                        .padding(.top, Constants.Padding.large)
 
                     Spacer()
                 }
@@ -25,7 +23,6 @@ struct ConnectView: View {
         }
         .sheet(isPresented: $viewModel.isPresentedSignView) {
             if let signViewModel = viewModel.signViewModel {
-
                 SignView(viewModel: signViewModel)
                     .background(
                         GeometryReader { geo in

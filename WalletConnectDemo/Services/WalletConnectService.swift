@@ -9,11 +9,13 @@ import Combine
 protocol WalletConnectService {
     var accountsDetailsPublisher: Published<[AccountDetails]>.Publisher { get }
     var accountsDetails: [AccountDetails] { get }
-    
+
     var isConnected: Bool { get }
 
     var isValidSessionPublisher: Published<Bool>.Publisher { get }
     var isValidSession: Bool { get }
+
+    var authResponsePublisher: Published<Result<Session, Error>?>.Publisher { get }
 
     func setup()
     func connect()
@@ -29,12 +31,15 @@ enum WalletConnectServiceError: Error {
 
 // TODO: Clean up the mock data
 class WalletConnectServiceImpl: WalletConnectService {
+
     var accountsDetailsPublisher: Published<[AccountDetails]>.Publisher { $accountsDetails }
     var isValidSessionPublisher: Published<Bool>.Publisher { $isValidSession }
+    var authResponsePublisher: Published<Result<WalletConnectSign.Session, any Error>?>.Publisher { $authResponse }
     var isConnected: Bool { session != nil && !accountsDetails.isEmpty }
 
     @Published var isValidSession = false
     @Published var accountsDetails = [AccountDetails]()
+    @Published var authResponse: Result<Session, Error>?
     @Published var message: String?
 
     private var session: Session?
@@ -149,6 +154,7 @@ private extension WalletConnectServiceImpl {
                     if let session {
                         print("PM: ", session)
 
+                        self.authResponse = .success(session)
                         self.isValidSession = true
 
                         // Reset, never use for now.
@@ -156,6 +162,7 @@ private extension WalletConnectServiceImpl {
                     }
                     break
                 case .failure(let error):
+                    self.authResponse = .failure(error)
                     print(error)
                 }
             }
@@ -196,7 +203,7 @@ private extension WalletConnectServiceImpl {
 
 actor DisconnectActor {
     var error: Error?
-    
+
     func setError(_ error: Error) {
         self.error = error
     }

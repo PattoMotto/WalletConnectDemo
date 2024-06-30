@@ -5,28 +5,34 @@ class AppViewModel: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
 
+    private let keychainService: KeychainService
     private let walletConnectService: WalletConnectService
+    private let sessionManagerService: SessionManagerService
 
     init(
         screen: Screen = .splash,
-        walletConnectService: WalletConnectService = WalletConnectServiceImpl()
+        keychainService: KeychainService,
+        walletConnectService: WalletConnectService,
+        sessionManagerService: SessionManagerService
     ) {
-        defer { setup() }
-
         self.screen = screen
+        self.keychainService = keychainService
         self.walletConnectService = walletConnectService
+        self.sessionManagerService = sessionManagerService
+
+        setup()
     }
 
     private func setup() {
         walletConnectService.setup()
-        observeSIWE()
+        sessionManagerService.restoreSession()
     }
 
     func didAppear() {
         // Delay 1 second to show the splash screen and preload data
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
             guard let self else { return }
-            self.autoUpdateScreen(isValidSession: self.walletConnectService.isValidSession)
+            observeValidSession()
         }
     }
 
@@ -35,17 +41,22 @@ class AppViewModel: ObservableObject {
         // TODO: Implement this!
     }
 
-    private func observeSIWE() {
-        walletConnectService.isValidSessionPublisher
+    private func observeValidSession() {
+        sessionManagerService.isValidSessionPublisher
             .receive(on: DispatchQueue.main)
-            .sink { [unowned self] isSIWE in
-                self.autoUpdateScreen(isValidSession: isSIWE)
+            .sink { [unowned self] isValidSession in
+                self.autoUpdateScreen(isValidSession: isValidSession)
             }.store(in: &cancellables)
     }
 
     private func autoUpdateScreen(isValidSession: Bool) {
         if isValidSession {
-            screen = .wallet(WalletViewModel(service: walletConnectService))
+            screen = .wallet(
+                WalletViewModel(
+                    walletConnectService: walletConnectService,
+                    sessionManagerService: sessionManagerService
+                )
+            )
         } else {
             screen = .connect(ConnectViewModel(service: walletConnectService))
         }

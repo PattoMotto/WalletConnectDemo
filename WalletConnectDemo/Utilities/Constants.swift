@@ -2,6 +2,7 @@ import Foundation
 
 enum Constants {
     static let groupIdentifier = "group.com.pattomotto.wcdemo"
+    static let appIdentifier = "com.pattomotto.wcdemo"
 
     enum CornerRadius {
         static let xSmall: CGFloat = 4

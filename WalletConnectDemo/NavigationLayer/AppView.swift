@@ -19,7 +19,3 @@ struct AppView: View {
         }
     }
 }
-
-#Preview {
-    AppView(viewModel: AppViewModel(screen: .splash))
-}

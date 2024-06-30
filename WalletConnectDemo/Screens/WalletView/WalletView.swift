@@ -8,6 +8,7 @@ struct WalletView: View {
             HStack {
                 Text("Welcome")
                     .font(.largeTitle)
+                    .bold()
 
                 Spacer()
                 
@@ -33,6 +34,11 @@ struct WalletView: View {
                     .buttonStyle(BorderedButtonStyle())
                     .sensoryFeedback(.success, trigger: viewModel.copiedToPasteboardCounter)
                 }
+            } else {
+                VStack(alignment: .center) {
+                    ProgressView("Loading")
+                }
+                .frame(maxWidth: .infinity)
             }
 
             Spacer()

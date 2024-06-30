@@ -1,7 +1,12 @@
 import Foundation
+import WalletConnectSign
 
 #if DEBUG
 class FakeWalletConnectService: WalletConnectService {
+    var authResponsePublisher: Published<Result<WalletConnectSign.Session, Error>?>.Publisher { $authResponse }
+
+    @Published var authResponse: Result<WalletConnectSign.Session, Error>?
+
     var isValidSessionPublisher: Published<Bool>.Publisher { $isValidSession }
 
     @Published var isValidSession = false
