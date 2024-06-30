@@ -3,6 +3,7 @@ import UIKit
 
 class SignViewModel: ObservableObject {
 
+    @MainActor
     @Published var qrCodeImageData: Data?
     @Published var copiedToPasteboardCounter = 0
 
@@ -34,9 +35,9 @@ class SignViewModel: ObservableObject {
 private extension SignViewModel {
     func generateQR() {
         Task {
-            let qrCodeImage = qrCodeGenerator(uri.absoluteString)
-            Task { @MainActor in
-                qrCodeImageData = qrCodeImage.pngData()
+            let pngData = qrCodeGenerator(uri.absoluteString).pngData()
+            Task { @MainActor [weak self]  in
+                self?.qrCodeImageData = pngData
             }
         }
     }

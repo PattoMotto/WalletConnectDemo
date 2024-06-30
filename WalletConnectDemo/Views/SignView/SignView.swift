@@ -7,14 +7,20 @@ struct SignView: View {
         VStack(alignment: .center, spacing: AppConstants.Spacing.default) {
             Text("Sign-In with Ethereum")
                 .font(.largeTitle)
-            if
-                let qrCodeImageData = viewModel.qrCodeImageData,
-                let uiImage = UIImage(data: qrCodeImageData)
-            {
-                Image(uiImage: uiImage)
-                    .clipShape(RoundedRectangle(cornerRadius: AppConstants.CornerRadius.small))
-            } else {
-                LoadingView()
+
+            Group {
+                if
+                    let qrCodeImageData = viewModel.qrCodeImageData,
+                    let uiImage = UIImage(data: qrCodeImageData)
+                {
+                    Image(uiImage: uiImage)
+                        .clipShape(RoundedRectangle(cornerRadius: AppConstants.CornerRadius.small))
+                } else {
+                    LoadingView()
+                }
+            }
+            .onAppear {
+                viewModel.didAppear()
             }
 
             Button("Copy link") {
@@ -24,8 +30,5 @@ struct SignView: View {
             .sensoryFeedback(.success, trigger: viewModel.copiedToPasteboardCounter)
         }
         .padding(.all, AppConstants.Padding.default)
-        .onAppear {
-            viewModel.didAppear()
-        }
     }
 }
