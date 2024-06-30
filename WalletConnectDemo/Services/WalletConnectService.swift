@@ -8,16 +8,13 @@ import Combine
 
 protocol WalletConnectService {
     var accountsDetailsPublisher: Published<[AccountDetails]>.Publisher { get }
-    var accountsDetails: [AccountDetails] { get }
-
-    var isConnected: Bool { get }
-
-    var isValidSessionPublisher: Published<Bool>.Publisher { get }
-    var isValidSession: Bool { get }
-
     var authResponsePublisher: Published<Result<Session, Error>?>.Publisher { get }
 
+    var isConnectedPublisher: Published<Bool>.Publisher { get }
+    var isConnected: Bool { get }
+
     func setup()
+    func restoreSession()
     func connect()
     func disconnect() async -> Result<Bool, WalletConnectServiceError>
     func signInWithEtherium() async -> Result<Uri, WalletConnectServiceError>
@@ -33,12 +30,15 @@ enum WalletConnectServiceError: Error {
 class WalletConnectServiceImpl: WalletConnectService {
 
     var accountsDetailsPublisher: Published<[AccountDetails]>.Publisher { $accountsDetails }
-    var isValidSessionPublisher: Published<Bool>.Publisher { $isValidSession }
     var authResponsePublisher: Published<Result<WalletConnectSign.Session, any Error>?>.Publisher { $authResponse }
-    var isConnected: Bool { session != nil && !accountsDetails.isEmpty }
+    var isConnectedPublisher: Published<Bool>.Publisher { $isConnected }
 
-    @Published var isValidSession = false
-    @Published var accountsDetails = [AccountDetails]()
+    @Published var isConnected = false
+    @Published private var accountsDetails = [AccountDetails]() {
+        didSet {
+            isConnected = !accountsDetails.isEmpty
+        }
+    }
     @Published var authResponse: Result<Session, Error>?
     @Published var message: String?
 
@@ -80,6 +80,13 @@ class WalletConnectServiceImpl: WalletConnectService {
         }
     }
 
+    func restoreSession() {
+        guard session == nil else { return }
+        Task {
+            getSession()
+        }
+    }
+
     @MainActor
     func connect() {
         WalletConnectModal.set(sessionParams: .init(
@@ -93,15 +100,14 @@ class WalletConnectServiceImpl: WalletConnectService {
         if let session {
             let actor = DisconnectActor()
 
-            Task {
-                do {
-                    try await Sign.instance.disconnect(topic: session.topic)
-                    accountsDetails.removeAll()
-                    isValidSession = false
-                } catch {
-                    await actor.setError(error)
-                }
+            do {
+                try await Sign.instance.disconnect(topic: session.topic)
+                try await Sign.instance.cleanup()
+            } catch {
+                await actor.setError(error)
             }
+
+            invalidateSession()
 
             return await actor.error.map { .failure(.sdkError($0)) } ?? .success(true)
         }
@@ -135,7 +141,7 @@ class WalletConnectServiceImpl: WalletConnectService {
 private extension WalletConnectServiceImpl {
     func invalidateSession() {
         accountsDetails.removeAll()
-        isValidSession = false
+        session = nil
     }
 
     func observeToSignPublisher() {
@@ -155,7 +161,6 @@ private extension WalletConnectServiceImpl {
                         print("PM: ", session)
 
                         self.authResponse = .success(session)
-                        self.isValidSession = true
 
                         // Reset, never use for now.
                         self.walletConnectURI = nil

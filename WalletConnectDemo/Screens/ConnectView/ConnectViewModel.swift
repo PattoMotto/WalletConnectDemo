@@ -14,40 +14,69 @@ class ConnectViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var isConnected = false
     @Published var sheetHeight: CGFloat = 0
-    @Published var connectCounter = 0
+    @Published var buttonFeedbackCounter = 0
 
     init(service: WalletConnectService) {
         self.service = service
-        observeSession()
+
+        setup()
     }
-    
+
+    func didAppear() {
+        service.restoreSession()
+    }
+
     func onTapConnect() {
-        connectCounter += 1
+        triggerFeedback()
         service.connect()
     }
 
+    func onTapSignInWithEthereum() {
+        triggerFeedback()
+        signInWithEtherium()
+    }
+
     func observeSession() {
-        service.accountsDetailsPublisher.receive(on: DispatchQueue.main)
-            .sink { [weak self] value in
-                self?.isConnected = !value.isEmpty
-                if !value.isEmpty {
-                    self?.isLoading = true
-                    Task { [weak self] in
-                        guard let self else { return }
-                        let result = await self.service.signInWithEtherium()
-                        Task { @MainActor in
-                            self.isLoading = false
-                            switch result {
-                            case .success(let uri):
-                                self.signViewModel = SignViewModel(uri: uri)
-                                self.isPresentedSignView = true
-                            case .failure(let error):
-                                print("PM: ", error)
-                            }
-                        }
-                    }
+        service.isConnectedPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isConnected in
+                guard let self else { return }
+
+                self.isConnected = isConnected
+                if isConnected {
+                    self.signInWithEtherium()
                 }
             }
             .store(in: &cancellables)
+    }
+}
+
+// MARK: - Private
+private extension ConnectViewModel {
+    func setup() {
+        self.isConnected = service.isConnected
+        observeSession()
+    }
+
+    func triggerFeedback() {
+        buttonFeedbackCounter += 1
+    }
+
+    func signInWithEtherium() {
+        isLoading = true
+        Task { [weak self] in
+            guard let self else { return }
+            let result = await self.service.signInWithEtherium()
+            Task { @MainActor in
+                self.isLoading = false
+                switch result {
+                case .success(let uri):
+                    self.signViewModel = SignViewModel(uri: uri)
+                    self.isPresentedSignView = true
+                case .failure(let error):
+                    print("PM: ", error)
+                }
+            }
+        }
     }
 }

@@ -5,21 +5,23 @@ struct ConnectView: View {
 
     var body: some View {
         ZStack {
-            Button("Connect") {
-                viewModel.onTapConnect()
+            if viewModel.isConnected {
+                signInWithEthereumButton
+            } else {
+                connectButton
             }
-            .buttonStyle(BorderedButtonStyle())
-            .disabled(viewModel.isLoading)
-            .sensoryFeedback(.success, trigger: viewModel.connectCounter)
 
             if viewModel.isLoading {
                 VStack {
-                    ProgressView("Loading")
+                    LoadingView()
                         .padding(.top, Constants.Padding.large)
 
                     Spacer()
                 }
             }
+        }
+        .onAppear {
+            viewModel.didAppear()
         }
         .sheet(isPresented: $viewModel.isPresentedSignView) {
             if let signViewModel = viewModel.signViewModel {
@@ -38,6 +40,27 @@ struct ConnectView: View {
                     .presentationDetents([.height(viewModel.sheetHeight)])
             }
         }
+    }
+}
+
+// MARK: - Private
+private extension ConnectView {
+    @ViewBuilder var signInWithEthereumButton: some View {
+        Button("Sign-In with Ethereum") {
+            viewModel.onTapSignInWithEthereum()
+        }
+        .buttonStyle(BorderedButtonStyle())
+        .disabled(viewModel.isLoading)
+        .sensoryFeedback(.success, trigger: viewModel.buttonFeedbackCounter)
+    }
+
+    @ViewBuilder var connectButton: some View {
+        Button("Connect") {
+            viewModel.onTapConnect()
+        }
+        .buttonStyle(BorderedButtonStyle())
+        .disabled(viewModel.isLoading)
+        .sensoryFeedback(.success, trigger: viewModel.buttonFeedbackCounter)
     }
 }
 

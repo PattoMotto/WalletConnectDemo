@@ -36,7 +36,7 @@ struct WalletView: View {
                 }
             } else {
                 VStack(alignment: .center) {
-                    ProgressView("Loading")
+                    LoadingView()
                 }
                 .frame(maxWidth: .infinity)
             }

@@ -13,6 +13,8 @@ struct SignView: View {
             {
                 Image(uiImage: uiImage)
                     .clipShape(RoundedRectangle(cornerRadius: Constants.CornerRadius.small))
+            } else {
+                LoadingView()
             }
 
             Button("Copy link") {

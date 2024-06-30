@@ -21,9 +21,11 @@ class SignViewModel: ObservableObject {
 // MARK: - Private
 private extension SignViewModel {
     func generateQR() {
-        Task { @MainActor in
+        Task {
             let qrCodeImage = QRCodeGenerator.generateQRCode(from: uri.absoluteString)
-            qrCodeImageData = qrCodeImage.pngData()
+            Task { @MainActor in
+                qrCodeImageData = qrCodeImage.pngData()
+            }
         }
     }
 }
