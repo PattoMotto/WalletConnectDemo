@@ -8,7 +8,7 @@ import Combine
 
 protocol WalletConnectService {
     var accountsDetailsPublisher: Published<[AccountDetails]>.Publisher { get }
-    var authResponsePublisher: Published<Result<Session, Error>?>.Publisher { get }
+    var authResponsePublisher: Published<Result<Session, WalletConnectServiceError>?>.Publisher { get }
     var errorPublisher: Published<WalletConnectServiceError?>.Publisher { get }
 
     var isConnectedPublisher: Published<Bool>.Publisher { get }
@@ -28,7 +28,7 @@ class WalletConnectServiceImpl: WalletConnectService {
     }
 
     var accountsDetailsPublisher: Published<[AccountDetails]>.Publisher { $accountsDetails }
-    var authResponsePublisher: Published<Result<WalletConnectSign.Session, any Error>?>.Publisher { $authResponse }
+    var authResponsePublisher: Published<Result<Session, WalletConnectServiceError>?>.Publisher { $authResponse }
     var isConnectedPublisher: Published<Bool>.Publisher { $isConnected }
     var errorPublisher: Published<WalletConnectServiceError?>.Publisher { $error }
 
@@ -38,7 +38,7 @@ class WalletConnectServiceImpl: WalletConnectService {
             isConnected = !accountsDetails.isEmpty
         }
     }
-    @Published var authResponse: Result<Session, Error>?
+    @Published var authResponse: Result<Session, WalletConnectServiceError>?
     @Published var error: WalletConnectServiceError? {
         didSet {
             if error != nil {
@@ -163,15 +163,15 @@ private extension WalletConnectServiceImpl {
                 switch response.result {
                 case .success(let (session, _)):
                     if let session, session.namespaces.values.contains(where: { $0.methods.contains(Constants.personalSignKey) }) {
-                        self.authResponse = .success(session)
+                        self.authResponse = .success(session.toLocalSession())
 
                         // Reset, never use for now.
                         self.walletConnectURI = nil
                     } else {
-                        self.authResponse = .failure(WalletConnectServiceError.authWithoutSession)
+                        self.authResponse = .failure(.authWithoutSession)
                     }
                 case .failure(let error):
-                    self.authResponse = .failure(error)
+                    self.authResponse = .failure(.authError(error))
                 }
             }
             .store(in: &cancellables)
@@ -247,9 +247,9 @@ private extension WalletConnectServiceImpl {
         process(sessions: Sign.instance.getSessions())
     }
 
-    func process(sessions: [Session]) {
+    func process(sessions: [WalletConnectSign.Session]) {
         guard let session = sessions.first else { return }
-        self.session = session
+        self.session = session.toLocalSession()
         session.namespaces.values.forEach { namespace in
             namespace.accounts.forEach { account in
                 accountsDetails.append(

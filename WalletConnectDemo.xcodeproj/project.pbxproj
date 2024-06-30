@@ -30,11 +30,18 @@
 		AD741C372C315C0E00823E36 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C362C315C0E00823E36 /* ErrorView.swift */; };
 		AD741C392C31715800823E36 /* KeychainServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C382C31715800823E36 /* KeychainServiceError.swift */; };
 		AD741C3B2C3176D100823E36 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C3A2C3176D100823E36 /* AppError.swift */; };
+		AD741C3D2C3186FA00823E36 /* AppViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C3C2C3186FA00823E36 /* AppViewModelTests.swift */; };
+		AD741C402C318BAF00823E36 /* MockKeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C3F2C318BAF00823E36 /* MockKeychainService.swift */; };
+		AD741C422C318D2400823E36 /* MockWalletConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C412C318D2400823E36 /* MockWalletConnectService.swift */; };
+		AD741C442C318D4700823E36 /* MockSessionManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C432C318D4700823E36 /* MockSessionManagerService.swift */; };
+		AD741C462C319C0200823E36 /* Spy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C452C319C0200823E36 /* Spy.swift */; };
+		AD741C4B2C31A11B00823E36 /* SessionManagerServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C4A2C31A11B00823E36 /* SessionManagerServiceTests.swift */; };
+		AD741C4D2C31A41B00823E36 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C4C2C31A41B00823E36 /* Session.swift */; };
+		AD741C522C31A5B100823E36 /* WalletConnectSignSession+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C512C31A5B100823E36 /* WalletConnectSignSession+Ext.swift */; };
 		AD873A6E2C2DE83200FC94A9 /* WalletConnectDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */; };
 		AD873A702C2DE83200FC94A9 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD873A6F2C2DE83200FC94A9 /* AppView.swift */; };
 		AD873A722C2DE83300FC94A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD873A712C2DE83300FC94A9 /* Assets.xcassets */; };
 		AD873A752C2DE83300FC94A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD873A742C2DE83300FC94A9 /* Preview Assets.xcassets */; };
-		AD873A7F2C2DE83300FC94A9 /* WalletConnectDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD873A7E2C2DE83300FC94A9 /* WalletConnectDemoTests.swift */; };
 		AD873A892C2DE83300FC94A9 /* WalletConnectDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD873A882C2DE83300FC94A9 /* WalletConnectDemoUITests.swift */; };
 		AD873A8B2C2DE83300FC94A9 /* WalletConnectDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD873A8A2C2DE83300FC94A9 /* WalletConnectDemoUITestsLaunchTests.swift */; };
 		ADA9F3D42C2DEACC00C6845F /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA9F3D32C2DEACC00C6845F /* ConnectView.swift */; };
@@ -93,13 +100,20 @@
 		AD741C362C315C0E00823E36 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		AD741C382C31715800823E36 /* KeychainServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceError.swift; sourceTree = "<group>"; };
 		AD741C3A2C3176D100823E36 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		AD741C3C2C3186FA00823E36 /* AppViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModelTests.swift; sourceTree = "<group>"; };
+		AD741C3F2C318BAF00823E36 /* MockKeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainService.swift; sourceTree = "<group>"; };
+		AD741C412C318D2400823E36 /* MockWalletConnectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWalletConnectService.swift; sourceTree = "<group>"; };
+		AD741C432C318D4700823E36 /* MockSessionManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSessionManagerService.swift; sourceTree = "<group>"; };
+		AD741C452C319C0200823E36 /* Spy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spy.swift; sourceTree = "<group>"; };
+		AD741C4A2C31A11B00823E36 /* SessionManagerServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManagerServiceTests.swift; sourceTree = "<group>"; };
+		AD741C4C2C31A41B00823E36 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		AD741C512C31A5B100823E36 /* WalletConnectSignSession+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletConnectSignSession+Ext.swift"; sourceTree = "<group>"; };
 		AD873A6A2C2DE83200FC94A9 /* WalletConnectDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletConnectDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectDemoApp.swift; sourceTree = "<group>"; };
 		AD873A6F2C2DE83200FC94A9 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		AD873A712C2DE83300FC94A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD873A742C2DE83300FC94A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AD873A7A2C2DE83300FC94A9 /* WalletConnectDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalletConnectDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD873A7E2C2DE83300FC94A9 /* WalletConnectDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectDemoTests.swift; sourceTree = "<group>"; };
 		AD873A842C2DE83300FC94A9 /* WalletConnectDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalletConnectDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD873A882C2DE83300FC94A9 /* WalletConnectDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectDemoUITests.swift; sourceTree = "<group>"; };
 		AD873A8A2C2DE83300FC94A9 /* WalletConnectDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -174,6 +188,7 @@
 			children = (
 				AD741C212C3076EB00823E36 /* Uri.swift */,
 				AD741C232C30770000823E36 /* AccountDetails.swift */,
+				AD741C4C2C31A41B00823E36 /* Session.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -213,6 +228,48 @@
 			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
+		AD741C3E2C318B9C00823E36 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				AD741C3F2C318BAF00823E36 /* MockKeychainService.swift */,
+				AD741C412C318D2400823E36 /* MockWalletConnectService.swift */,
+				AD741C432C318D4700823E36 /* MockSessionManagerService.swift */,
+				AD741C452C319C0200823E36 /* Spy.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		AD741C472C31A0CF00823E36 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				AD741C3C2C3186FA00823E36 /* AppViewModelTests.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		AD741C482C31A0E500823E36 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		AD741C492C31A10100823E36 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AD741C4A2C31A11B00823E36 /* SessionManagerServiceTests.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AD741C502C31A59800823E36 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AD741C512C31A5B100823E36 /* WalletConnectSignSession+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		AD873A612C2DE83200FC94A9 = {
 			isa = PBXGroup;
 			children = (
@@ -236,23 +293,24 @@
 		AD873A6C2C2DE83200FC94A9 /* WalletConnectDemo */ = {
 			isa = PBXGroup;
 			children = (
-				AD741C332C3149F300823E36 /* ViewModifiers */,
-				AD741C2D2C313A5B00823E36 /* Components */,
-				AD741C2A2C31208400823E36 /* Dependencies */,
-				AD741BFD2C2F2EE400823E36 /* WalletConnectDemoRelease.entitlements */,
-				AD741BFC2C2F2E4C00823E36 /* WalletConnectDemoDebug.entitlements */,
-				ADA9F4142C2F118900C6845F /* NavigationLayer */,
-				ADA9F4002C2DFF4200C6845F /* Info.plist */,
-				AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */,
+				AD741C502C31A59800823E36 /* Extensions */,
 				AD873A712C2DE83300FC94A9 /* Assets.xcassets */,
-				ADA9F40E2C2E6B6000C6845F /* Utilities */,
-				AD741C302C31473000823E36 /* Errors */,
-				ADA9F40B2C2E6AD000C6845F /* Services */,
-				ADA9F3D02C2DEA3900C6845F /* Screens */,
-				AD741C202C3076D600823E36 /* Models */,
-				AD741C072C2F43FB00823E36 /* Mocks */,
-				AD873A732C2DE83300FC94A9 /* Preview Content */,
+				AD741C2D2C313A5B00823E36 /* Components */,
 				ADA9F4152C2F141300C6845F /* Configuration.xcconfig */,
+				AD741C2A2C31208400823E36 /* Dependencies */,
+				AD741C302C31473000823E36 /* Errors */,
+				ADA9F4002C2DFF4200C6845F /* Info.plist */,
+				AD741C072C2F43FB00823E36 /* Mocks */,
+				AD741C202C3076D600823E36 /* Models */,
+				ADA9F4142C2F118900C6845F /* Navigation */,
+				AD873A732C2DE83300FC94A9 /* Preview Content */,
+				ADA9F3D02C2DEA3900C6845F /* Screens */,
+				ADA9F40B2C2E6AD000C6845F /* Services */,
+				ADA9F40E2C2E6B6000C6845F /* Utilities */,
+				AD741C332C3149F300823E36 /* ViewModifiers */,
+				AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */,
+				AD741BFC2C2F2E4C00823E36 /* WalletConnectDemoDebug.entitlements */,
+				AD741BFD2C2F2EE400823E36 /* WalletConnectDemoRelease.entitlements */,
 			);
 			path = WalletConnectDemo;
 			sourceTree = "<group>";
@@ -268,7 +326,10 @@
 		AD873A7D2C2DE83300FC94A9 /* WalletConnectDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				AD873A7E2C2DE83300FC94A9 /* WalletConnectDemoTests.swift */,
+				AD741C492C31A10100823E36 /* Services */,
+				AD741C482C31A0E500823E36 /* Screens */,
+				AD741C472C31A0CF00823E36 /* Navigation */,
+				AD741C3E2C318B9C00823E36 /* Mocks */,
 			);
 			path = WalletConnectDemoTests;
 			sourceTree = "<group>";
@@ -345,13 +406,13 @@
 			path = SplashView;
 			sourceTree = "<group>";
 		};
-		ADA9F4142C2F118900C6845F /* NavigationLayer */ = {
+		ADA9F4142C2F118900C6845F /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
 				AD873A6F2C2DE83200FC94A9 /* AppView.swift */,
 				ADA9F40F2C2E6F8000C6845F /* AppViewModel.swift */,
 			);
-			path = NavigationLayer;
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -530,9 +591,11 @@
 				AD741C392C31715800823E36 /* KeychainServiceError.swift in Sources */,
 				AD741C372C315C0E00823E36 /* ErrorView.swift in Sources */,
 				ADA9F4042C2E026200C6845F /* DefaultCryptoProvider.swift in Sources */,
+				AD741C4D2C31A41B00823E36 /* Session.swift in Sources */,
 				AD741C092C2F441900823E36 /* FakeWalletConnectService.swift in Sources */,
 				AD741C2C2C3120A000823E36 /* DependenciesManager.swift in Sources */,
 				AD741C062C2F3F2000823E36 /* AuthRequestParams+stub.swift in Sources */,
+				AD741C522C31A5B100823E36 /* WalletConnectSignSession+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,7 +603,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD873A7F2C2DE83300FC94A9 /* WalletConnectDemoTests.swift in Sources */,
+				AD741C442C318D4700823E36 /* MockSessionManagerService.swift in Sources */,
+				AD741C3D2C3186FA00823E36 /* AppViewModelTests.swift in Sources */,
+				AD741C462C319C0200823E36 /* Spy.swift in Sources */,
+				AD741C4B2C31A11B00823E36 /* SessionManagerServiceTests.swift in Sources */,
+				AD741C402C318BAF00823E36 /* MockKeychainService.swift in Sources */,
+				AD741C422C318D2400823E36 /* MockWalletConnectService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

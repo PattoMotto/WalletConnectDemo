@@ -3,9 +3,9 @@ import WalletConnectSign
 
 #if DEBUG
 class FakeWalletConnectService: WalletConnectService {
-    var authResponsePublisher: Published<Result<WalletConnectSign.Session, Error>?>.Publisher { $authResponse }
+    var authResponsePublisher: Published<Result<Session, WalletConnectServiceError>?>.Publisher { $authResponse }
 
-    @Published var authResponse: Result<WalletConnectSign.Session, Error>?
+    @Published var authResponse: Result<Session, WalletConnectServiceError>?
 
     var accountsDetailsPublisher: Published<[AccountDetails]>.Publisher { $accountsDetails }
 

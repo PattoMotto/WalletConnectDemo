@@ -34,7 +34,26 @@ class SessionManagerServiceImpl: SessionManagerService {
         observeAuthResponse()
     }
 
-    private func observeAuthResponse() {
+    func restoreSession() {
+        if let storedSession: Session = try? self.keychainService.read(key: Constants.sessionKey) {
+            session = storedSession.isValid == true ? storedSession : nil
+        }
+    }
+
+    func clearSession() {
+        do {
+            try keychainService.delete(key: Constants.sessionKey)
+            session = nil
+        } catch {
+            // TODO: Log this to server
+            print(error)
+        }
+    }
+}
+
+// MARK: - Private
+private extension SessionManagerServiceImpl {
+    func observeAuthResponse() {
         walletConnectService.authResponsePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
@@ -52,23 +71,6 @@ class SessionManagerServiceImpl: SessionManagerService {
             .store(in: &cancellables)
     }
 
-    func restoreSession() {
-        if let storedSession: WalletConnectSign.Session = try? self.keychainService.read(key: Constants.sessionKey) {
-            session = storedSession.isValid == true ? storedSession : nil
-        }
-    }
-
-    func clearSession() {
-        do {
-            try keychainService.delete(key: Constants.sessionKey)
-            session = nil
-        } catch {
-            print(error)
-        }
-    }
-}
-
-private extension SessionManagerServiceImpl {
     func store(session: Session) {
         let key = Constants.sessionKey
         Task {

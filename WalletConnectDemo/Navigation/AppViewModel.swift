@@ -23,11 +23,6 @@ class AppViewModel: ObservableObject {
         setup()
     }
 
-    private func setup() {
-        walletConnectService.setup()
-        sessionManagerService.restoreSession()
-    }
-
     func didAppear() {
         // Delay 1 second to show the splash screen and preload data
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
@@ -40,8 +35,16 @@ class AppViewModel: ObservableObject {
         walletConnectService.handle(deeplink: url.absoluteString)
         // TODO: Implement this!
     }
+}
 
-    private func observeValidSession() {
+// MARK: - Private
+private extension AppViewModel {
+    func setup() {
+        walletConnectService.setup()
+        sessionManagerService.restoreSession()
+    }
+
+    func observeValidSession() {
         sessionManagerService.isValidSessionPublisher
             .receive(on: DispatchQueue.main)
             .sink { [unowned self] isValidSession in
@@ -49,7 +52,7 @@ class AppViewModel: ObservableObject {
             }.store(in: &cancellables)
     }
 
-    private func autoUpdateScreen(isValidSession: Bool) {
+    func autoUpdateScreen(isValidSession: Bool) {
         if isValidSession {
             screen = .wallet(
                 WalletViewModel(
