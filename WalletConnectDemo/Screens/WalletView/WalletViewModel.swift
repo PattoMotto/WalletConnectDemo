@@ -4,6 +4,7 @@ import Combine
 class WalletViewModel: ObservableObject {
     @Published var addressId: String?
     @Published var copiedToPasteboardCounter = 0
+    @Published var disconnectCounter = 0
     @Published var isDisconnecting = false
     @Published var error: AppError?
 
@@ -29,16 +30,20 @@ class WalletViewModel: ObservableObject {
     }
 
     func onTapDisconnect() {
+        disconnectCounter += 1
         isDisconnecting = true
         Task {
             let result = await walletConnectService.disconnect()
-            switch result {
-            case .success:
-                sessionManagerService.clearSession()
-            case .failure(let error):
-                await handle(error: error)
+            Task { @MainActor [weak self] in
+                guard let self else { return }
+                switch result {
+                case .success:
+                    self.sessionManagerService.clearSession()
+                case .failure(let error):
+                    self.handle(error: error)
+                }
+                self.isDisconnecting = false
             }
-            isDisconnecting = false
         }
     }
 
@@ -61,7 +66,11 @@ private extension WalletViewModel {
         walletConnectService.accountsDetailsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] accountsDetails in
-                self?.addressId = accountsDetails.first?.account
+                guard let self,
+                      let addressId = accountsDetails.first?.account else {
+                    return
+                }
+                self.update(addressId: addressId)
             }
             .store(in: &cancellables)
     }
@@ -69,16 +78,18 @@ private extension WalletViewModel {
     func observeError() {
         walletConnectService.errorPublisher
             .receive(on: DispatchQueue.main)
-            .sink { error in
+            .sink { [weak self] error in
                 guard let error else { return }
-                Task { @MainActor [weak self] in
-                    self?.handle(error: error)
-                }
+                self?.handle(error: error)
             }
             .store(in: &cancellables)
     }
 
-    @MainActor
+    func update(addressId: String) {
+        guard self.addressId != addressId else { return }
+        self.addressId = addressId
+    }
+
     func handle(error: WalletConnectServiceError) {
         self.error = .wallet(error)
     }

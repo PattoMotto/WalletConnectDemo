@@ -18,7 +18,7 @@ final class SignViewModelTests: XCTestCase {
             },
             qrCodeGenerator: { [weak self] text in
                 self?.qrCodeGeneratorCalledWithText = text
-                return UIImage()
+                return UIImage(systemName: "heart.fill")!
             }
         )
     }
@@ -34,7 +34,7 @@ final class SignViewModelTests: XCTestCase {
 
         let expectationQrCodeImageData = expectation(description: "wait for qrCodeImageData to be changed")
         sut.$qrCodeImageData
-            .filter { $0 == nil }
+            .filter { $0 != nil }
             .first()
             .sink { _ in
                 expectationQrCodeImageData.fulfill()

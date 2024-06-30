@@ -17,7 +17,7 @@ struct WalletView: View {
                 }
                 .buttonStyle(BorderedButtonStyle())
                 .disabled(viewModel.isDisconnecting)
-                .sensoryFeedback(.warning, trigger: viewModel.isDisconnecting)
+                .sensoryFeedback(.warning, trigger: viewModel.disconnectCounter)
             }
 
 

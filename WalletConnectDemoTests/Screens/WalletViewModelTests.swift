@@ -71,6 +71,7 @@ final class WalletViewModelTests: XCTestCase {
 
         sut.onTapDisconnect()
 
+        XCTAssertEqual(sut.disconnectCounter, 1)
         XCTAssertTrue(sut.isDisconnecting)
         let expectationIsDisconnecting = expectation(description: "wait for isDisconnecting to be changed")
         sut.$isDisconnecting
@@ -90,6 +91,7 @@ final class WalletViewModelTests: XCTestCase {
 
         sut.onTapDisconnect()
 
+        XCTAssertEqual(sut.disconnectCounter, 1)
         XCTAssertTrue(sut.isDisconnecting)
         let expectationIsDisconnecting = expectation(description: "wait for isDisconnecting to be changed")
         sut.$isDisconnecting

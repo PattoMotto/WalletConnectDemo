@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SignView: View {
     @ObservedObject var viewModel: SignViewModel
+    @State private var qrCodeImage: UIImage?
 
     var body: some View {
         VStack(alignment: .center, spacing: AppConstants.Spacing.default) {
@@ -9,10 +10,7 @@ struct SignView: View {
                 .font(.largeTitle)
 
             Group {
-                if
-                    let qrCodeImageData = viewModel.qrCodeImageData,
-                    let uiImage = UIImage(data: qrCodeImageData)
-                {
+                if let uiImage = qrCodeImage {
                     Image(uiImage: uiImage)
                         .clipShape(RoundedRectangle(cornerRadius: AppConstants.CornerRadius.small))
                 } else {
@@ -30,5 +28,9 @@ struct SignView: View {
             .sensoryFeedback(.success, trigger: viewModel.copiedToPasteboardCounter)
         }
         .padding(.all, AppConstants.Padding.default)
+        .onChange(of: viewModel.qrCodeImageData) { oldValue, newValue in
+            guard let data = newValue else { return }
+            qrCodeImage = UIImage(data: data)
+        }
     }
 }
