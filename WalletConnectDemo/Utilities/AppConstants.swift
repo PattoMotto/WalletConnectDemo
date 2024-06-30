@@ -1,8 +1,10 @@
 import Foundation
 
-enum Constants {
+enum AppConstants {
     static let groupIdentifier = "group.com.pattomotto.wcdemo"
     static let appIdentifier = "com.pattomotto.wcdemo"
+
+    static let errorDuration: TimeInterval = 5
 
     enum CornerRadius {
         static let xSmall: CGFloat = 4

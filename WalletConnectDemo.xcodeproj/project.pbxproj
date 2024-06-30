@@ -17,7 +17,7 @@
 		AD741C172C2F532400823E36 /* SignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C162C2F532400823E36 /* SignView.swift */; };
 		AD741C192C2F532C00823E36 /* SignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C182C2F532C00823E36 /* SignViewModel.swift */; };
 		AD741C1B2C30386A00823E36 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C1A2C30386A00823E36 /* QRCodeGenerator.swift */; };
-		AD741C1D2C303C0800823E36 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C1C2C303C0800823E36 /* Constants.swift */; };
+		AD741C1D2C303C0800823E36 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C1C2C303C0800823E36 /* AppConstants.swift */; };
 		AD741C1F2C3048D200823E36 /* Pasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C1E2C3048D200823E36 /* Pasteboard.swift */; };
 		AD741C222C3076EB00823E36 /* Uri.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C212C3076EB00823E36 /* Uri.swift */; };
 		AD741C242C30770000823E36 /* AccountDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C232C30770000823E36 /* AccountDetails.swift */; };
@@ -25,6 +25,11 @@
 		AD741C292C307E9400823E36 /* SessionManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C282C307E9400823E36 /* SessionManagerService.swift */; };
 		AD741C2C2C3120A000823E36 /* DependenciesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C2B2C3120A000823E36 /* DependenciesManager.swift */; };
 		AD741C2F2C313A6400823E36 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C2E2C313A6400823E36 /* LoadingView.swift */; };
+		AD741C322C31473800823E36 /* WalletConnectServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C312C31473800823E36 /* WalletConnectServiceError.swift */; };
+		AD741C352C3149FF00823E36 /* ErrorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C342C3149FF00823E36 /* ErrorModifier.swift */; };
+		AD741C372C315C0E00823E36 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C362C315C0E00823E36 /* ErrorView.swift */; };
+		AD741C392C31715800823E36 /* KeychainServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C382C31715800823E36 /* KeychainServiceError.swift */; };
+		AD741C3B2C3176D100823E36 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD741C3A2C3176D100823E36 /* AppError.swift */; };
 		AD873A6E2C2DE83200FC94A9 /* WalletConnectDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */; };
 		AD873A702C2DE83200FC94A9 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD873A6F2C2DE83200FC94A9 /* AppView.swift */; };
 		AD873A722C2DE83300FC94A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD873A712C2DE83300FC94A9 /* Assets.xcassets */; };
@@ -75,7 +80,7 @@
 		AD741C162C2F532400823E36 /* SignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignView.swift; sourceTree = "<group>"; };
 		AD741C182C2F532C00823E36 /* SignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignViewModel.swift; sourceTree = "<group>"; };
 		AD741C1A2C30386A00823E36 /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
-		AD741C1C2C303C0800823E36 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AD741C1C2C303C0800823E36 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		AD741C1E2C3048D200823E36 /* Pasteboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pasteboard.swift; sourceTree = "<group>"; };
 		AD741C212C3076EB00823E36 /* Uri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uri.swift; sourceTree = "<group>"; };
 		AD741C232C30770000823E36 /* AccountDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetails.swift; sourceTree = "<group>"; };
@@ -83,6 +88,11 @@
 		AD741C282C307E9400823E36 /* SessionManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManagerService.swift; sourceTree = "<group>"; };
 		AD741C2B2C3120A000823E36 /* DependenciesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependenciesManager.swift; sourceTree = "<group>"; };
 		AD741C2E2C313A6400823E36 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		AD741C312C31473800823E36 /* WalletConnectServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectServiceError.swift; sourceTree = "<group>"; };
+		AD741C342C3149FF00823E36 /* ErrorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModifier.swift; sourceTree = "<group>"; };
+		AD741C362C315C0E00823E36 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		AD741C382C31715800823E36 /* KeychainServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceError.swift; sourceTree = "<group>"; };
+		AD741C3A2C3176D100823E36 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		AD873A6A2C2DE83200FC94A9 /* WalletConnectDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletConnectDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectDemoApp.swift; sourceTree = "<group>"; };
 		AD873A6F2C2DE83200FC94A9 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
@@ -180,8 +190,27 @@
 			isa = PBXGroup;
 			children = (
 				AD741C2E2C313A6400823E36 /* LoadingView.swift */,
+				AD741C362C315C0E00823E36 /* ErrorView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		AD741C302C31473000823E36 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				AD741C312C31473800823E36 /* WalletConnectServiceError.swift */,
+				AD741C382C31715800823E36 /* KeychainServiceError.swift */,
+				AD741C3A2C3176D100823E36 /* AppError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		AD741C332C3149F300823E36 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				AD741C342C3149FF00823E36 /* ErrorModifier.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 		AD873A612C2DE83200FC94A9 = {
@@ -207,6 +236,7 @@
 		AD873A6C2C2DE83200FC94A9 /* WalletConnectDemo */ = {
 			isa = PBXGroup;
 			children = (
+				AD741C332C3149F300823E36 /* ViewModifiers */,
 				AD741C2D2C313A5B00823E36 /* Components */,
 				AD741C2A2C31208400823E36 /* Dependencies */,
 				AD741BFD2C2F2EE400823E36 /* WalletConnectDemoRelease.entitlements */,
@@ -216,6 +246,7 @@
 				AD873A6D2C2DE83200FC94A9 /* WalletConnectDemoApp.swift */,
 				AD873A712C2DE83300FC94A9 /* Assets.xcassets */,
 				ADA9F40E2C2E6B6000C6845F /* Utilities */,
+				AD741C302C31473000823E36 /* Errors */,
 				ADA9F40B2C2E6AD000C6845F /* Services */,
 				ADA9F3D02C2DEA3900C6845F /* Screens */,
 				AD741C202C3076D600823E36 /* Models */,
@@ -300,7 +331,7 @@
 				ADA9F4032C2E026200C6845F /* DefaultCryptoProvider.swift */,
 				AD741C052C2F3F2000823E36 /* AuthRequestParams+stub.swift */,
 				AD741C1A2C30386A00823E36 /* QRCodeGenerator.swift */,
-				AD741C1C2C303C0800823E36 /* Constants.swift */,
+				AD741C1C2C303C0800823E36 /* AppConstants.swift */,
 				AD741C1E2C3048D200823E36 /* Pasteboard.swift */,
 			);
 			path = Utilities;
@@ -474,6 +505,7 @@
 				ADA9F3FF2C2DFCAC00C6845F /* Configuration.swift in Sources */,
 				ADA9F4022C2E00A900C6845F /* Proposal.swift in Sources */,
 				ADA9F4132C2E75D100C6845F /* SplashView.swift in Sources */,
+				AD741C322C31473800823E36 /* WalletConnectServiceError.swift in Sources */,
 				AD741C292C307E9400823E36 /* SessionManagerService.swift in Sources */,
 				ADA9F4102C2E6F8000C6845F /* AppViewModel.swift in Sources */,
 				AD741C272C3078DF00823E36 /* KeychainService.swift in Sources */,
@@ -482,17 +514,21 @@
 				ADA9F3D42C2DEACC00C6845F /* ConnectView.swift in Sources */,
 				ADA9F3DA2C2DEBBD00C6845F /* ConnectViewModel.swift in Sources */,
 				AD741C242C30770000823E36 /* AccountDetails.swift in Sources */,
+				AD741C352C3149FF00823E36 /* ErrorModifier.swift in Sources */,
 				ADA9F3D62C2DEAD100C6845F /* WalletView.swift in Sources */,
 				ADA9F3D82C2DEB2400C6845F /* WalletViewModel.swift in Sources */,
-				AD741C1D2C303C0800823E36 /* Constants.swift in Sources */,
+				AD741C1D2C303C0800823E36 /* AppConstants.swift in Sources */,
 				AD741C1F2C3048D200823E36 /* Pasteboard.swift in Sources */,
 				AD741C172C2F532400823E36 /* SignView.swift in Sources */,
 				ADA9F3DE2C2DED3900C6845F /* Screen.swift in Sources */,
+				AD741C3B2C3176D100823E36 /* AppError.swift in Sources */,
 				AD741C222C3076EB00823E36 /* Uri.swift in Sources */,
 				ADA9F3F92C2DFA6800C6845F /* DefaultSocketFactory.swift in Sources */,
 				ADA9F40D2C2E6ADF00C6845F /* WalletConnectService.swift in Sources */,
 				AD873A702C2DE83200FC94A9 /* AppView.swift in Sources */,
 				AD873A6E2C2DE83200FC94A9 /* WalletConnectDemoApp.swift in Sources */,
+				AD741C392C31715800823E36 /* KeychainServiceError.swift in Sources */,
+				AD741C372C315C0E00823E36 /* ErrorView.swift in Sources */,
 				ADA9F4042C2E026200C6845F /* DefaultCryptoProvider.swift in Sources */,
 				AD741C092C2F441900823E36 /* FakeWalletConnectService.swift in Sources */,
 				AD741C2C2C3120A000823E36 /* DependenciesManager.swift in Sources */,

@@ -3,7 +3,6 @@ import WalletConnectSign
 
 #if DEBUG
 class FakeWalletConnectService: WalletConnectService {
-
     var authResponsePublisher: Published<Result<WalletConnectSign.Session, Error>?>.Publisher { $authResponse }
 
     @Published var authResponse: Result<WalletConnectSign.Session, Error>?
@@ -16,11 +15,11 @@ class FakeWalletConnectService: WalletConnectService {
 
     @Published var isConnected = false
 
+    var errorPublisher: Published<WalletConnectServiceError?>.Publisher { $error }
+
+    @Published var error: WalletConnectServiceError?
+
     func setup() {
-
-    }
-
-    func restoreSession() {
 
     }
 

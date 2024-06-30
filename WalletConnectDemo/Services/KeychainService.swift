@@ -8,13 +8,6 @@ protocol KeychainService {
     func delete(key: String) throws
 }
 
-enum KeychainServiceError: Error {
-    case creatingError
-    case encodingKeyError
-    case readingError
-    case updatingError
-    case deletingError
-}
 
 class KeychainServiceImpl: KeychainService {
 
@@ -29,7 +22,7 @@ class KeychainServiceImpl: KeychainService {
         // Set attributes
         let attributes: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: Constants.appIdentifier,
+            kSecAttrService as String: AppConstants.appIdentifier,
             kSecAttrAccount as String: utf8EncodedKey,
             kSecValueData as String: data
         ]
@@ -42,7 +35,7 @@ class KeychainServiceImpl: KeychainService {
             throw KeychainServiceError.encodingKeyError
         }
         let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword,
-                                    kSecAttrService as String: Constants.appIdentifier,
+                                    kSecAttrService as String: AppConstants.appIdentifier,
                                     kSecAttrAccount as String: utf8EncodedKey,
                                     kSecReturnData as String: true,
                                     kSecMatchLimit as String: kSecMatchLimitOne
@@ -61,7 +54,7 @@ class KeychainServiceImpl: KeychainService {
 
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: Constants.appIdentifier,
+            kSecAttrService as String: AppConstants.appIdentifier,
             kSecAttrAccount as String: utf8EncodedKey
         ]
         let attributes: [String: Any] = [
@@ -78,7 +71,7 @@ class KeychainServiceImpl: KeychainService {
         }
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: Constants.appIdentifier,
+            kSecAttrService as String: AppConstants.appIdentifier,
             kSecAttrAccount as String: utf8EncodedKey
         ]
         let status = SecItemDelete(query as CFDictionary)

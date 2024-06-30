@@ -9,29 +9,28 @@ import Combine
 protocol WalletConnectService {
     var accountsDetailsPublisher: Published<[AccountDetails]>.Publisher { get }
     var authResponsePublisher: Published<Result<Session, Error>?>.Publisher { get }
+    var errorPublisher: Published<WalletConnectServiceError?>.Publisher { get }
 
     var isConnectedPublisher: Published<Bool>.Publisher { get }
     var isConnected: Bool { get }
 
     func setup()
-    func restoreSession()
     func connect()
     func disconnect() async -> Result<Bool, WalletConnectServiceError>
     func signInWithEtherium() async -> Result<Uri, WalletConnectServiceError>
     func handle(deeplink: String)
 }
 
-enum WalletConnectServiceError: Error {
-    case cannotGenerateSignUri
-    case sdkError(Error)
-}
-
 // TODO: Clean up the mock data
 class WalletConnectServiceImpl: WalletConnectService {
+    private enum Constants {
+        static let personalSignKey = "personal_sign"
+    }
 
     var accountsDetailsPublisher: Published<[AccountDetails]>.Publisher { $accountsDetails }
     var authResponsePublisher: Published<Result<WalletConnectSign.Session, any Error>?>.Publisher { $authResponse }
     var isConnectedPublisher: Published<Bool>.Publisher { $isConnected }
+    var errorPublisher: Published<WalletConnectServiceError?>.Publisher { $error }
 
     @Published var isConnected = false
     @Published private var accountsDetails = [AccountDetails]() {
@@ -40,14 +39,20 @@ class WalletConnectServiceImpl: WalletConnectService {
         }
     }
     @Published var authResponse: Result<Session, Error>?
-    @Published var message: String?
+    @Published var error: WalletConnectServiceError? {
+        didSet {
+            if error != nil {
+                error = nil
+            }
+        }
+    }
 
     private var session: Session?
     private var walletConnectURI: WalletConnectURI?
     private let metadata = AppMetadata(
         name: "WalletConnect Demo",
         description: "WalletConnect sample",
-        url: "https://lab.web3modal.com/dapp",
+        url: "https://pattomotto.com",
         icons: ["https://avatars.githubusercontent.com/u/37784886"],
         redirect: try! AppMetadata.Redirect(native: "wcdemo://", universal: nil)
     )
@@ -58,7 +63,7 @@ class WalletConnectServiceImpl: WalletConnectService {
         // TODO: Recheck the steps
         Task {
             Networking.configure(
-                groupIdentifier: Constants.groupIdentifier,
+                groupIdentifier: AppConstants.groupIdentifier,
                 projectId: Configuration.projectId,
                 socketFactory: DefaultSocketFactory()
             )
@@ -77,13 +82,7 @@ class WalletConnectServiceImpl: WalletConnectService {
 
             getSession()
             observeToSignPublisher()
-        }
-    }
-
-    func restoreSession() {
-        guard session == nil else { return }
-        Task {
-            getSession()
+            observeToWalletConnectModalPublisher()
         }
     }
 
@@ -116,7 +115,7 @@ class WalletConnectServiceImpl: WalletConnectService {
 
     func signInWithEtherium() async -> Result<Uri, WalletConnectServiceError> {
         do {
-            let uri = try await Sign.instance.authenticate(.stub(methods: ["personal_sign"]))
+            let uri = try await Sign.instance.authenticate(.stub(methods: [Constants.personalSignKey]))
             guard let uri else {
                 return .failure(.cannotGenerateSignUri)
             }
@@ -128,7 +127,6 @@ class WalletConnectServiceImpl: WalletConnectService {
     }
 
     func handle(deeplink: String) {
-        getSession()
         do {
             try Sign.instance.dispatchEnvelope(deeplink)
         } catch {
@@ -152,23 +150,28 @@ private extension WalletConnectServiceImpl {
             }
             .store(in: &cancellables)
 
+        Sign.instance.sessionRejectionPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [unowned self] _, reason in
+                self.error = .sessionRejection(reason.message)
+            }
+            .store(in: &cancellables)
+
         Sign.instance.authResponsePublisher
             .receive(on: DispatchQueue.main)
             .sink { [unowned self] response in
                 switch response.result {
                 case .success(let (session, _)):
-                    if let session {
-                        print("PM: ", session)
-
+                    if let session, session.namespaces.values.contains(where: { $0.methods.contains(Constants.personalSignKey) }) {
                         self.authResponse = .success(session)
 
                         // Reset, never use for now.
                         self.walletConnectURI = nil
+                    } else {
+                        self.authResponse = .failure(WalletConnectServiceError.authWithoutSession)
                     }
-                    break
                 case .failure(let error):
                     self.authResponse = .failure(error)
-                    print(error)
                 }
             }
             .store(in: &cancellables)
@@ -176,31 +179,86 @@ private extension WalletConnectServiceImpl {
         Sign.instance.sessionResponsePublisher
             .receive(on: DispatchQueue.main)
             .sink { response in
-                print("PM: ", response)
+                print("PM: sessionResponsePublisher", response)
             }
             .store(in: &cancellables)
 
         Sign.instance.requestExpirationPublisher
             .receive(on: DispatchQueue.main)
-            .sink { _ in
-                print("request expired")
+            .sink { [unowned self] _ in
+                self.error = .requestExpired
+            }
+            .store(in: &cancellables)
+
+        Sign.instance.socketConnectionStatusPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [unowned self] status in
+                switch status {
+                case .connected:
+                    break
+                case .disconnected:
+                    self.error = .socketDisconnected
+                }
+            }
+            .store(in: &cancellables)
+
+        Sign.instance.sessionsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [unowned self] sessions in
+                self.process(sessions: sessions)
+            }
+            .store(in: &cancellables)
+    }
+
+    func observeToWalletConnectModalPublisher() {
+        WalletConnectModal.instance.socketConnectionStatusPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [unowned self] status in
+                switch status {
+                case .connected:
+                    break
+                case .disconnected:
+                    self.error = .socketDisconnected
+                }
+            }
+            .store(in: &cancellables)
+
+        WalletConnectModal.instance.sessionRejectionPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [unowned self] proposal, reason in
+                self.error = .sessionRejection(reason.message)
+            }
+            .store(in: &cancellables)
+
+        WalletConnectModal.instance.sessionResponsePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [unowned self] response in
+                switch response.result {
+                case .response(let response):
+                    print("PM: sessionResponsePublisher", response)
+                case .error(let error):
+                    self.error = .jsonRPCError(error)
+                }
             }
             .store(in: &cancellables)
     }
 
     func getSession() {
-        if let session = Sign.instance.getSessions().first {
-            self.session = session
-            session.namespaces.values.forEach { namespace in
-                namespace.accounts.forEach { account in
-                    accountsDetails.append(
-                        AccountDetails(
-                            chain: account.blockchainIdentifier,
-                            methods: Array(namespace.methods),
-                            account: account.address
-                        )
+        process(sessions: Sign.instance.getSessions())
+    }
+
+    func process(sessions: [Session]) {
+        guard let session = sessions.first else { return }
+        self.session = session
+        session.namespaces.values.forEach { namespace in
+            namespace.accounts.forEach { account in
+                accountsDetails.append(
+                    AccountDetails(
+                        chain: account.blockchainIdentifier,
+                        methods: Array(namespace.methods),
+                        account: account.address
                     )
-                }
+                )
             }
         }
     }

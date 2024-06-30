@@ -4,7 +4,7 @@ struct SignView: View {
     @ObservedObject var viewModel: SignViewModel
 
     var body: some View {
-        VStack(alignment: .center, spacing: Constants.Spacing.default) {
+        VStack(alignment: .center, spacing: AppConstants.Spacing.default) {
             Text("Sign-In with Ethereum")
                 .font(.largeTitle)
             if
@@ -12,7 +12,7 @@ struct SignView: View {
                 let uiImage = UIImage(data: qrCodeImageData)
             {
                 Image(uiImage: uiImage)
-                    .clipShape(RoundedRectangle(cornerRadius: Constants.CornerRadius.small))
+                    .clipShape(RoundedRectangle(cornerRadius: AppConstants.CornerRadius.small))
             } else {
                 LoadingView()
             }
@@ -23,6 +23,6 @@ struct SignView: View {
             .buttonStyle(BorderedButtonStyle())
             .sensoryFeedback(.success, trigger: viewModel.copiedToPasteboardCounter)
         }
-        .padding(.all, Constants.Padding.default)
+        .padding(.all, AppConstants.Padding.default)
     }
 }

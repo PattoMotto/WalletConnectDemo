@@ -14,14 +14,14 @@ struct ConnectView: View {
             if viewModel.isLoading {
                 VStack {
                     LoadingView()
-                        .padding(.top, Constants.Padding.large)
+                        .padding(.top, AppConstants.Padding.large)
 
                     Spacer()
                 }
             }
         }
-        .onAppear {
-            viewModel.didAppear()
+        .showError(error: viewModel.error) {
+            viewModel.errorDidDisappear()
         }
         .sheet(isPresented: $viewModel.isPresentedSignView) {
             if let signViewModel = viewModel.signViewModel {

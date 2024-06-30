@@ -4,7 +4,7 @@ struct WalletView: View {
     @ObservedObject var viewModel: WalletViewModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing: Constants.Spacing.default) {
+        VStack(alignment: .leading, spacing: AppConstants.Spacing.default) {
             HStack {
                 Text("Welcome")
                     .font(.largeTitle)
@@ -16,12 +16,13 @@ struct WalletView: View {
                     viewModel.onTapDisconnect()
                 }
                 .buttonStyle(BorderedButtonStyle())
+                .disabled(viewModel.isDisconnecting)
                 .sensoryFeedback(.warning, trigger: viewModel.isDisconnecting)
             }
 
 
             if let addressId = viewModel.addressId {
-                VStack(alignment: .leading, spacing: Constants.Spacing.small) {
+                VStack(alignment: .leading, spacing: AppConstants.Spacing.small) {
                     Text("Your address")
                         .font(.title)
 
@@ -43,6 +44,9 @@ struct WalletView: View {
 
             Spacer()
         }
-        .padding(.all, Constants.Padding.default)
+        .padding(.all, AppConstants.Padding.default)
+        .showError(error: viewModel.error) {
+            viewModel.errorDidDisappear()
+        }
     }
 }

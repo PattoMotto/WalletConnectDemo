@@ -43,7 +43,7 @@ class SessionManagerServiceImpl: SessionManagerService {
                 case .success(let session):
                     self.session = session
                     self.store(session: session)
-                case .failure(let error):
+                case .failure:
                     self.session = nil
                 case .none:
                     break

@@ -5,6 +5,7 @@ class WalletViewModel: ObservableObject {
     @Published var addressId: String?
     @Published var copiedToPasteboardCounter = 0
     @Published var isDisconnecting = false
+    @Published var error: AppError?
 
     private var cancellables = Set<AnyCancellable>()
     private let walletConnectService: WalletConnectService
@@ -17,7 +18,11 @@ class WalletViewModel: ObservableObject {
         self.walletConnectService = walletConnectService
         self.sessionManagerService = sessionManagerService
 
-        observeAddressId()
+        setup()
+    }
+
+    func errorDidDisappear() {
+        self.error = nil
     }
 
     func onTapDisconnect() {
@@ -26,11 +31,10 @@ class WalletViewModel: ObservableObject {
             let result = await walletConnectService.disconnect()
             switch result {
             case .success:
-                print("Disconnected")
+                sessionManagerService.clearSession()
             case .failure(let error):
-                print(error)
+                await handle(error: error)
             }
-            sessionManagerService.clearSession()
         }
     }
 
@@ -44,6 +48,11 @@ class WalletViewModel: ObservableObject {
 
 // MARK: - Private
 private extension WalletViewModel {
+    func setup() {
+        observeAddressId()
+        observeError()
+    }
+
     func observeAddressId() {
         walletConnectService.accountsDetailsPublisher
             .receive(on: DispatchQueue.main)
@@ -51,5 +60,22 @@ private extension WalletViewModel {
                 self?.addressId = accountsDetails.first?.account
             }
             .store(in: &cancellables)
+    }
+
+    func observeError() {
+        walletConnectService.errorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { error in
+                guard let error else { return }
+                Task { @MainActor [weak self] in
+                    self?.handle(error: error)
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    @MainActor
+    func handle(error: WalletConnectServiceError) {
+        self.error = .wallet(error)
     }
 }

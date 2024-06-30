@@ -15,6 +15,7 @@ class ConnectViewModel: ObservableObject {
     @Published var isConnected = false
     @Published var sheetHeight: CGFloat = 0
     @Published var buttonFeedbackCounter = 0
+    @Published var error: AppError?
 
     init(service: WalletConnectService) {
         self.service = service
@@ -22,8 +23,8 @@ class ConnectViewModel: ObservableObject {
         setup()
     }
 
-    func didAppear() {
-        service.restoreSession()
+    func errorDidDisappear() {
+        self.error = nil
     }
 
     func onTapConnect() {
@@ -34,6 +35,15 @@ class ConnectViewModel: ObservableObject {
     func onTapSignInWithEthereum() {
         triggerFeedback()
         signInWithEtherium()
+    }
+}
+
+// MARK: - Private
+private extension ConnectViewModel {
+    func setup() {
+        self.isConnected = service.isConnected
+        observeSession()
+        observeError()
     }
 
     func observeSession() {
@@ -49,13 +59,18 @@ class ConnectViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
-}
 
-// MARK: - Private
-private extension ConnectViewModel {
-    func setup() {
-        self.isConnected = service.isConnected
-        observeSession()
+    func observeError() {
+        service.errorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink {  error in
+                if let error {
+                    Task { @MainActor [weak self] in
+                        self?.handle(error: error)
+                    }
+                }
+            }
+            .store(in: &cancellables)
     }
 
     func triggerFeedback() {
@@ -74,9 +89,14 @@ private extension ConnectViewModel {
                     self.signViewModel = SignViewModel(uri: uri)
                     self.isPresentedSignView = true
                 case .failure(let error):
-                    print("PM: ", error)
+                    self.handle(error: error)
                 }
             }
         }
+    }
+
+    @MainActor
+    func handle(error: WalletConnectServiceError) {
+        self.error = .wallet(error)
     }
 }
